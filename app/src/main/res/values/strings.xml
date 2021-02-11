@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">ProjectA</string>
+    <string name="registerPageLoginBtn">Log in</string>
 </resources>
