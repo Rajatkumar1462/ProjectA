@@ -8,6 +8,9 @@ import android.os.Bundle;
 import android.view.MenuItem;
 
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.rajat.projecta.Fragment.AccountFragment;
+import com.rajat.projecta.Fragment.FaqFragment;
+import com.rajat.projecta.Fragment.HomeFragment;
 
 public class FragmentActivity extends AppCompatActivity {
 
@@ -15,6 +18,7 @@ public class FragmentActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fragment);
+
 
         BottomNavigationView bottomnav = findViewById(R.id.bottom_navigation);
         getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container,new HomeFragment()).commit();

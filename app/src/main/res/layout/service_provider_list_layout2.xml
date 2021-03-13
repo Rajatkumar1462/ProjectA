@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="180dp"
+    android:orientation="vertical"
+    android:background="@drawable/bg_classic"
+    android:layout_margin="8dp">
+
+    <ImageView
+        android:id="@+id/service_provider_image"
+        android:layout_width="100dp"
+        android:layout_height="80dp"
+        android:layout_marginTop="10dp"
+        android:layout_centerHorizontal="true"
+        android:src="@drawable/profile_user" />
+
+    <TextView
+        android:id="@+id/service_provider_title"
+        android:layout_width="75dp"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="10dp"
+        android:gravity="center_horizontal"
+        android:text="Name"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/service_provider_rating"
+        android:layout_width="75dp"
+        android:layout_height="30dp"
+        android:layout_alignParentStart="true"
+        android:layout_marginTop="100dp"
+        android:layout_alignParentLeft="true"
+        android:layout_marginLeft="100dp"
+        android:gravity="center_horizontal"
+        android:text="Rating"
+        android:textSize="20sp" />
+
+    <TextView
+        android:id="@+id/service_provider_info"
+        android:layout_width="180dp"
+        android:layout_height="40dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="135dp"
+        android:layout_centerHorizontal="true"
+        android:text="Info"
+        android:textSize="18sp" />
+
+</RelativeLayout>
