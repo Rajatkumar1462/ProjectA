@@ -56,7 +56,7 @@ public class AccountFragment extends Fragment {
         updateValues("Name", meName);
         updateValues("Email", meEmail);
         updateValues("Address", meAddress);
-        updateValues("KYC", meKyc);
+        updateValues("Aadhar Number", meKyc);
         updateValues("Orders", meOrder);
 
 //        meName.setText((CharSequence) FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
