@@ -34,7 +34,9 @@ public class AccountFragment extends Fragment {
         meEdit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                startActivity(new Intent(getActivity(), MainActivity.class));
+                Intent intent = new Intent(getActivity(), MainActivity.class);
+                intent.putExtra("UserId", FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
+                startActivity(intent);
             }
         });
 

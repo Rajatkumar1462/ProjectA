@@ -49,7 +49,6 @@ public class RegisterActivity extends AppCompatActivity {
         mAuth = FirebaseAuth.getInstance();
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-
         // checking if user already logged in or not
         if(isLoggedIn()){
             Toast.makeText(this, "Welcome "+mAuth.getCurrentUser().getDisplayName(), Toast.LENGTH_SHORT).show();
@@ -102,7 +101,7 @@ public class RegisterActivity extends AppCompatActivity {
                                         });
 
 
-                                updateUI(user);
+                                updateUI(user, UserId);
                             } else{
                                 Toast.makeText(RegisterActivity.this, "Authentication failed with following message : "+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
@@ -157,8 +156,7 @@ public class RegisterActivity extends AppCompatActivity {
                                             }
                                         });
 
-
-                                updateUI(user);
+                                updateUI(user, UserId);
                             } else{
                                 Toast.makeText(RegisterActivity.this, "Authentication failed with following message : "+task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                             }
@@ -187,10 +185,17 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     //updating if user successfully registered
-    public void updateUI(FirebaseUser user) {
+    public void updateUI(FirebaseUser user, String UserId) {
         if(user != null) {
-            Toast.makeText(this, "Welcome "+user.getDisplayName(), Toast.LENGTH_SHORT).show();
-            startActivity(new Intent(getApplicationContext(), MainActivity.class));
+
+            //making entries in firebase
+            mDatabase.child("start").child(user.getUid()).child("Email").setValue(user.getEmail());
+            mDatabase.child("start").child(user.getUid()).child("Name").setValue(UserId);
+
+            Toast.makeText(this, "Welcome "+UserId, Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            intent.putExtra("UserId", UserId);
+            startActivity(intent);
             finish();
         } else {
             Toast.makeText(this, "Username can't be null", Toast.LENGTH_SHORT).show();
@@ -207,7 +212,7 @@ public class RegisterActivity extends AppCompatActivity {
     }
 
     void writeNewUser(String UserId, String Email, String Password){
-        User user = new User(Email, Password);
+        User user = new User(Email, Password, UserId);
         mDatabase.child("users").child(UserId).setValue(user);
     }
 
@@ -217,14 +222,16 @@ public class RegisterActivity extends AppCompatActivity {
 class User {
     public String Password;
     public String Email;
+    public String UserId;
 
     public User() {
         // Default constructor required for calls to DataSnapshot.getValue(User.class)
     }
 
     // parameterized constructor
-    public User(String Email, String Password) {
+    public User(String Email, String Password, String UserId) {
         this.Password = Password;
         this.Email = Email;
+        this.UserId = UserId;
     }
 }
