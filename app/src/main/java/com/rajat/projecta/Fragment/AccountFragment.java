@@ -21,6 +21,8 @@ public class AccountFragment extends Fragment {
     @Nullable
     private Button meSignOut;
     private Button meEdit;
+
+
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_account,container,false);
         meSignOut = view.findViewById(R.id.me_signout);

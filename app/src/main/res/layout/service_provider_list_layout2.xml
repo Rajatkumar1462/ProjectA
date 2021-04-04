@@ -16,7 +16,7 @@
         android:background="@drawable/bg_classic">
 
         <ImageView
-            android:id="@+id/BookProfile"
+            android:id="@+id/service_provider_image"
             android:layout_width="100dp"
             android:layout_height="100dp"
             android:layout_marginTop="10dp"
@@ -32,33 +32,30 @@
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp">
             <TextView
-                android:id="@+id/Bookname"
+                android:id="@+id/service_provider_title"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:text="Name"
-                android:textColor="@color/white"
                 android:textSize="24sp"
                 />
             <TextView
-                android:id="@+id/BookRating"
+                android:id="@+id/service_provider_rating"
                 android:layout_width="0dp"
                 android:layout_weight="1"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal"
                 android:text="Rating"
                 android:textSize="24sp"
-                android:textColor="@color/white"
                 />
 
         </LinearLayout>
         <TextView
-            android:id="@+id/BookInfo"
+            android:id="@+id/service_provider_info"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="24sp"
-            android:textColor="@color/white"
             android:text="Info"
             android:layout_marginLeft="20dp"
             android:layout_marginRight="20dp"

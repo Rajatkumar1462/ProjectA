@@ -1,0 +1,305 @@
+Index: app/src/main/res/layout/service_provider_list_layout2.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/service_provider_list_layout2.xml	(revision bf9af3507d5443dbd49b7fd4263bb1659fa4b28c)
++++ app/src/main/res/layout/service_provider_list_layout2.xml	(revision bf9af3507d5443dbd49b7fd4263bb1659fa4b28c)
+@@ -1,70 +0,0 @@
+-<?xml version="1.0" encoding="utf-8"?>
+-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+-    android:layout_width="wrap_content"
+-    android:layout_height="210dp"
+-    xmlns:app="http://schemas.android.com/apk/res-auto"
+-    android:orientation="vertical"
+-    android:layout_margin="8dp">
+-
+-    <LinearLayout
+-        android:layout_width="match_parent"
+-        android:layout_height="wrap_content"
+-        android:gravity="center_horizontal"
+-        android:orientation="vertical"
+-        android:layout_marginLeft="20dp"
+-        android:layout_marginRight="20dp"
+-        android:background="@drawable/bg_classic">
+-
+-        <ImageView
+-            android:id="@+id/BookProfile"
+-            android:layout_width="100dp"
+-            android:layout_height="100dp"
+-            android:layout_marginTop="10dp"
+-            android:layout_marginBottom="10dp"
+-            app:srcCompat="@drawable/profile_user" />
+-
+-        <LinearLayout
+-            android:layout_width="match_parent"
+-            android:layout_height="match_parent"
+-            android:orientation="horizontal"
+-            android:gravity="center_horizontal"
+-            android:layout_marginBottom="10dp"
+-            android:layout_marginLeft="20dp"
+-            android:layout_marginRight="20dp">
+-            <TextView
+-                android:id="@+id/Bookname"
+-                android:layout_width="0dp"
+-                android:layout_weight="1"
+-                android:layout_height="wrap_content"
+-                android:gravity="center_horizontal"
+-                android:text="Name"
+-                android:textColor="@color/white"
+-                android:textSize="24sp"
+-                />
+-            <TextView
+-                android:id="@+id/BookRating"
+-                android:layout_width="0dp"
+-                android:layout_weight="1"
+-                android:layout_height="wrap_content"
+-                android:gravity="center_horizontal"
+-                android:text="Rating"
+-                android:textSize="24sp"
+-                android:textColor="@color/white"
+-                />
+-
+-        </LinearLayout>
+-        <TextView
+-            android:id="@+id/BookInfo"
+-            android:layout_width="match_parent"
+-            android:layout_height="wrap_content"
+-            android:textSize="24sp"
+-            android:textColor="@color/white"
+-            android:text="Info"
+-            android:layout_marginLeft="20dp"
+-            android:layout_marginRight="20dp"
+-            android:layout_marginBottom="10dp"
+-            android:gravity="center_horizontal"/>
+-
+-    </LinearLayout>
+-
+-</RelativeLayout>
+\ No newline at end of file
+Index: app/src/main/java/com/rajat/projecta/Adapter/ServiceProviderAdapter2.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/rajat/projecta/Adapter/ServiceProviderAdapter2.java	(revision bf9af3507d5443dbd49b7fd4263bb1659fa4b28c)
++++ app/src/main/java/com/rajat/projecta/Adapter/ServiceProviderAdapter2.java	(revision bf9af3507d5443dbd49b7fd4263bb1659fa4b28c)
+@@ -1,80 +0,0 @@
+-package com.rajat.projecta.Adapter;
+-
+-import android.view.LayoutInflater;
+-import android.view.View;
+-import android.view.ViewGroup;
+-import android.widget.ImageView;
+-import android.widget.TextView;
+-
+-import androidx.annotation.NonNull;
+-import androidx.recyclerview.widget.RecyclerView;
+-
+-import com.rajat.projecta.Helper.ServiceProviderHelper;
+-import com.rajat.projecta.R;
+-
+-import java.util.ArrayList;
+-
+-
+-public class ServiceProviderAdapter2 extends RecyclerView.Adapter<ServiceProviderAdapter2.SeviceProviderViewHolder>{
+-
+-    ArrayList <ServiceProviderHelper> list;
+-    ServiceproviderClickInterface serviceproviderClickInterface;
+-
+-    // clickable constructor
+-    public ServiceProviderAdapter2(ArrayList <ServiceProviderHelper> list, ServiceproviderClickInterface serviceproviderClickInterface){
+-        this.list=list;
+-        this.serviceproviderClickInterface=serviceproviderClickInterface;
+-    }
+-
+-    //original constructor
+-    public ServiceProviderAdapter2(ArrayList <ServiceProviderHelper> list){
+-        this.list=list;
+-    }
+-
+-
+-    @NonNull
+-    @Override
+-    public SeviceProviderViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+-        LayoutInflater inflater = LayoutInflater.from(parent.getContext());
+-        View view = inflater.inflate(R.layout.service_provider_list_layout2,parent,false);
+-        return new SeviceProviderViewHolder(view);
+-    }
+-
+-    @Override
+-    public void onBindViewHolder(@NonNull SeviceProviderViewHolder holder, int position) {
+-        ServiceProviderHelper helper = list.get(position);
+-        holder.img.setImageResource(helper.getImage());
+-        holder.title.setText(helper.getTitle());
+-        holder.rating.setText(helper.getRating());
+-        holder.info.setText(helper.getInfo());
+-    }
+-
+-    @Override
+-    public int getItemCount() {
+-        return list.size();
+-    }
+-
+-    //RecyclerView ClickListner
+-    public class SeviceProviderViewHolder extends RecyclerView.ViewHolder{
+-        ImageView img;
+-        TextView title;
+-        TextView rating;
+-        TextView info;
+-        public SeviceProviderViewHolder(@NonNull View itemView) {
+-            super(itemView);
+-            img = (ImageView)itemView.findViewById(R.id.service_provider_image);
+-            title = (TextView)itemView.findViewById(R.id.service_provider_title);
+-            rating = (TextView)itemView.findViewById(R.id.service_provider_rating);
+-            info = (TextView)itemView.findViewById(R.id.service_provider_info);
+-            itemView.setOnClickListener(new View.OnClickListener() {
+-                @Override
+-                public void onClick(View v) {
+-                    serviceproviderClickInterface.onSpItemClick(getAdapterPosition());
+-                }
+-            });
+-        }
+-    }
+-    public interface ServiceproviderClickInterface{
+-        void onSpItemClick(int position);
+-    }
+-}
+Index: app/src/main/java/com/rajat/projecta/CategoryListActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.rajat.projecta;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.recyclerview.widget.GridLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport com.rajat.projecta.Adapter.ServiceProviderAdapter;\r\nimport com.rajat.projecta.Adapter.ServiceProviderAdapter2;\r\nimport com.rajat.projecta.Helper.ServiceProviderHelper;\r\n\r\nimport java.util.ArrayList;\r\n\r\npublic class CategoryListActivity extends AppCompatActivity implements ServiceProviderAdapter2.ServiceproviderClickInterface {\r\n\r\n    //Declaration\r\n    ArrayList<ServiceProviderHelper> sp_list = new ArrayList<>();\r\n\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        getSupportActionBar().hide();\r\n        setContentView(R.layout.activity_categorylist);\r\n\r\n        RecyclerView serviceprovider_full_list = findViewById(R.id.sp_full_list);\r\n        serviceprovider_full_list.setLayoutManager(new GridLayoutManager(this,2));\r\n\r\n        sp_list.add(new ServiceProviderHelper(R.drawable.driver,\"Driver1\",\"5 star\",\"he is a 5star driver\"));\r\n        sp_list.add(new ServiceProviderHelper(R.drawable.driver,\"Driver2\",\"5 star\",\"he is a 5star driver\"));\r\n        sp_list.add(new ServiceProviderHelper(R.drawable.driver,\"Driver3\",\"4.5 star\",\"he is a 4.5star driver\"));\r\n\r\n        sp_list.add(new ServiceProviderHelper(R.drawable.maid,\"maid1\",\"5 star\",\"he is a 5 star maid\"));\r\n        sp_list.add(new ServiceProviderHelper(R.drawable.maid,\"maid2\",\"5 star\",\"he is a 5 star maid\"));\r\n        sp_list.add(new ServiceProviderHelper(R.drawable.maid,\"maid3\",\"4.5 star\",\"he is a 4.5 star maid\"));\r\n\r\n        sp_list.add(new ServiceProviderHelper(R.drawable.gardner,\"gard1\",\"5 star\",\"he is a 5star gardner\"));\r\n        sp_list.add(new ServiceProviderHelper(R.drawable.gardner,\"gard2\",\"5 star\",\"he is a 5star gardner\"));\r\n        sp_list.add(new ServiceProviderHelper(R.drawable.gardner,\"gard3\",\"4.5 star\",\"he is a 4.5star gardner\"));\r\n\r\n        serviceprovider_full_list.setAdapter(new ServiceProviderAdapter2(sp_list, (ServiceProviderAdapter2.ServiceproviderClickInterface) this));\r\n    }\r\n\r\n    @Override\r\n    public void onSpItemClick(int position) {\r\n        String title = sp_list.get(position).getTitle();\r\n        String rating = sp_list.get(position).getRating();\r\n        String info = sp_list.get(position).getInfo();\r\n        int image = sp_list.get(position).getImage();\r\n\r\n        Intent intent = new Intent(CategoryListActivity.this,BookActivity.class);\r\n\r\n        intent.putExtra(\"title\",title);\r\n        intent.putExtra(\"rating\",rating);\r\n        intent.putExtra(\"info\",info);\r\n        intent.putExtra(\"profile\",image);\r\n\r\n        startActivity(intent);\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/rajat/projecta/CategoryListActivity.java	(revision bf9af3507d5443dbd49b7fd4263bb1659fa4b28c)
++++ app/src/main/java/com/rajat/projecta/CategoryListActivity.java	(date 1617548644768)
+@@ -2,11 +2,14 @@
+ 
+ import android.content.Intent;
+ import android.os.Bundle;
++import android.widget.TextView;
+ 
+ import androidx.appcompat.app.AppCompatActivity;
+ import androidx.recyclerview.widget.GridLayoutManager;
+ import androidx.recyclerview.widget.RecyclerView;
+ 
++import com.google.firebase.auth.FirebaseAuth;
++import com.google.firebase.auth.FirebaseUser;
+ import com.rajat.projecta.Adapter.ServiceProviderAdapter;
+ import com.rajat.projecta.Adapter.ServiceProviderAdapter2;
+ import com.rajat.projecta.Helper.ServiceProviderHelper;
+@@ -16,28 +19,42 @@
+ public class CategoryListActivity extends AppCompatActivity implements ServiceProviderAdapter2.ServiceproviderClickInterface {
+ 
+     //Declaration
++    private TextView AtTopName;
+     ArrayList<ServiceProviderHelper> sp_list = new ArrayList<>();
++    FirebaseUser user;
+ 
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+         getSupportActionBar().hide();
+         setContentView(R.layout.activity_categorylist);
++        user = FirebaseAuth.getInstance().getCurrentUser();
++        //settingDisplayName
++        AtTopName = findViewById(R.id.atTopName_all);
++        AtTopName.setText(user.getDisplayName());
+ 
+         RecyclerView serviceprovider_full_list = findViewById(R.id.sp_full_list);
+-        serviceprovider_full_list.setLayoutManager(new GridLayoutManager(this,2));
++        serviceprovider_full_list.setLayoutManager(new GridLayoutManager(this,1));
++
++        sp_list.add(new ServiceProviderHelper(R.drawable.cook,"Suresh","5 star","3 year Experience"));
++        sp_list.add(new ServiceProviderHelper(R.drawable.cook,"Mamta Devi","4.7 star","1 year Experience"));
++        sp_list.add(new ServiceProviderHelper(R.drawable.cook,"Gopal","3.7 star","6 Month Experience"));
+ 
+-        sp_list.add(new ServiceProviderHelper(R.drawable.driver,"Driver1","5 star","he is a 5star driver"));
+-        sp_list.add(new ServiceProviderHelper(R.drawable.driver,"Driver2","5 star","he is a 5star driver"));
+-        sp_list.add(new ServiceProviderHelper(R.drawable.driver,"Driver3","4.5 star","he is a 4.5star driver"));
++        sp_list.add(new ServiceProviderHelper(R.drawable.driver,"Basant","4.8 star","2.5 year Experience"));
++        sp_list.add(new ServiceProviderHelper(R.drawable.driver,"Tahir","4.5 star","2 year Experience"));
++        sp_list.add(new ServiceProviderHelper(R.drawable.driver,"Rajiv Anna","4.4 star","1 year Experience"));
+ 
+-        sp_list.add(new ServiceProviderHelper(R.drawable.maid,"maid1","5 star","he is a 5 star maid"));
+-        sp_list.add(new ServiceProviderHelper(R.drawable.maid,"maid2","5 star","he is a 5 star maid"));
+-        sp_list.add(new ServiceProviderHelper(R.drawable.maid,"maid3","4.5 star","he is a 4.5 star maid"));
++        sp_list.add(new ServiceProviderHelper(R.drawable.maid,"Mala","4.9 star","5 year Experience"));
++        sp_list.add(new ServiceProviderHelper(R.drawable.maid,"Shakuntala","4.8 star","3.5 year Experience"));
++        sp_list.add(new ServiceProviderHelper(R.drawable.maid,"Ramu","4.5 star","2 year Experience"));
+ 
+-        sp_list.add(new ServiceProviderHelper(R.drawable.gardner,"gard1","5 star","he is a 5star gardner"));
+-        sp_list.add(new ServiceProviderHelper(R.drawable.gardner,"gard2","5 star","he is a 5star gardner"));
+-        sp_list.add(new ServiceProviderHelper(R.drawable.gardner,"gard3","4.5 star","he is a 4.5star gardner"));
++        sp_list.add(new ServiceProviderHelper(R.drawable.gardner,"Prakash","4.5 star","2 year Experience"));
++        sp_list.add(new ServiceProviderHelper(R.drawable.gardner,"Raman","4.4 star","1 year Experience"));
++        sp_list.add(new ServiceProviderHelper(R.drawable.gardner,"Shadique","4.3 star","New"));
++
++        sp_list.add(new ServiceProviderHelper(R.drawable.baby_sitter,"Pragati","4.5 star","3 year Experience"));
++        sp_list.add(new ServiceProviderHelper(R.drawable.baby_sitter,"Mohini","4 star","2 year Experience"));
++        sp_list.add(new ServiceProviderHelper(R.drawable.baby_sitter,"Rohini","3.8 star","1 year Experience"));
+ 
+         serviceprovider_full_list.setAdapter(new ServiceProviderAdapter2(sp_list, (ServiceProviderAdapter2.ServiceproviderClickInterface) this));
+     }
+Index: app/src/main/java/com/rajat/projecta/Fragment/HomeFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.rajat.projecta.Fragment;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.EditText;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.annotation.Nullable;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.rajat.projecta.Adapter.CategoryAdapter;\r\nimport com.rajat.projecta.Adapter.ServiceProviderAdapter;\r\nimport com.rajat.projecta.BookActivity;\r\nimport com.rajat.projecta.CategoryListActivity;\r\nimport com.rajat.projecta.Helper.ServiceProviderHelper;\r\nimport com.rajat.projecta.MainActivity;\r\nimport com.rajat.projecta.R;\r\nimport com.rajat.projecta.RecentListActivity;\r\n\r\nimport java.util.ArrayList;\r\n\r\npublic class HomeFragment extends Fragment implements CategoryAdapter.CategoryclickInterface, ServiceProviderAdapter.ServiceproviderClickInterface {\r\n    //Declaration\r\n    private TextView AtTopName;\r\n    ArrayList<String> cat_list = new ArrayList<>();\r\n    ArrayList<ServiceProviderHelper> sp_list = new ArrayList<>();\r\n    ArrayList<ServiceProviderHelper> sp_list_Cook = new ArrayList<>();\r\n    ArrayList<ServiceProviderHelper> sp_list_Driver = new ArrayList<>();\r\n    ArrayList<ServiceProviderHelper> sp_list_Maid = new ArrayList<>();\r\n    ArrayList<ServiceProviderHelper> sp_list_Gardner = new ArrayList<>();\r\n    ArrayList<ServiceProviderHelper> sp_list_Baby_Sitter = new ArrayList<>();\r\n    ServiceProviderAdapter adapter;\r\n    FirebaseUser user;\r\n\r\n    @Nullable\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {\r\n\r\n        View view = inflater.inflate(R.layout.fragment_home,container,false);\r\n        user = FirebaseAuth.getInstance().getCurrentUser();\r\n        //settingDisplayName\r\n        AtTopName = view.findViewById(R.id.atTopName);\r\n//        String nameFromMainActivity = MainActivity.getName();\r\n        AtTopName.setText(user.getDisplayName());\r\n\r\n        //RecyclerView For Displaying Categories list Horizontal\r\n        RecyclerView category_list = view.findViewById(R.id.category_list);\r\n        category_list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL,false));\r\n\r\n        //Values are declared here\r\n        cat_list.add(\"Cook\"); cat_list.add(\"Driver\");\r\n        cat_list.add(\"Maid\"); cat_list.add(\"Gardner\");\r\n        cat_list.add(\"Baby Sitter\");\r\n        category_list.setAdapter(new CategoryAdapter(cat_list, (CategoryAdapter.CategoryclickInterface) this));\r\n\r\n        //RecyclerView For Displaying ServiceProvider list Horizontal\r\n        RecyclerView serviceprovider_list = view.findViewById(R.id.service_provider_list);\r\n        serviceprovider_list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL,false));\r\n\r\n        //values are declared  here\r\n        sp_list_Cook.add(new ServiceProviderHelper(R.drawable.cook,\"Suresh\",\"5 star\",\"3 year Experience\"));\r\n        sp_list_Cook.add(new ServiceProviderHelper(R.drawable.cook,\"Mamta Devi\",\"4.7 star\",\"1 year Experience\"));\r\n        sp_list_Cook.add(new ServiceProviderHelper(R.drawable.cook,\"Gopal\",\"3.7 star\",\"6 Month Experience\"));\r\n        sp_list.addAll(sp_list_Cook);\r\n\r\n        sp_list_Driver.add(new ServiceProviderHelper(R.drawable.driver,\"Basant\",\"4.8 star\",\"2.5 year Experience\"));\r\n        sp_list_Driver.add(new ServiceProviderHelper(R.drawable.driver,\"Tahir\",\"4.5 star\",\"2 year Experience\"));\r\n        sp_list_Driver.add(new ServiceProviderHelper(R.drawable.driver,\"Rajiv Anna\",\"4.4 star\",\"1 year Experience\"));\r\n\r\n        sp_list_Maid.add(new ServiceProviderHelper(R.drawable.maid,\"Mala\",\"4.9 star\",\"5 year Experience\"));\r\n        sp_list_Maid.add(new ServiceProviderHelper(R.drawable.maid,\"Shakuntala\",\"4.8 star\",\"3.5 year Experience\"));\r\n        sp_list_Maid.add(new ServiceProviderHelper(R.drawable.maid,\"Ramu\",\"4.5 star\",\"2 year Experience\"));\r\n\r\n        sp_list_Gardner.add(new ServiceProviderHelper(R.drawable.gardner,\"Prakash\",\"4.5 star\",\"2 year Experience\"));\r\n        sp_list_Gardner.add(new ServiceProviderHelper(R.drawable.gardner,\"Raman\",\"4.4 star\",\"1 year Experience\"));\r\n        sp_list_Gardner.add(new ServiceProviderHelper(R.drawable.gardner,\"Shadique\",\"4.3 star\",\"New\"));\r\n\r\n        sp_list_Baby_Sitter.add(new ServiceProviderHelper(R.drawable.baby_sitter,\"Pragati\",\"4.5 star\",\"3 year Experience\"));\r\n        sp_list_Baby_Sitter.add(new ServiceProviderHelper(R.drawable.baby_sitter,\"Mohini\",\"4 star\",\"2 year Experience\"));\r\n        sp_list_Baby_Sitter.add(new ServiceProviderHelper(R.drawable.baby_sitter,\"Rohini\",\"3.8 star\",\"1 year Experience\"));\r\n\r\n        adapter = new ServiceProviderAdapter(sp_list, (ServiceProviderAdapter.ServiceproviderClickInterface) this);\r\n        serviceprovider_list.setAdapter(adapter);\r\n\r\n        //Category Sell All Button ClickListner\r\n        TextView cat_see_all;\r\n        cat_see_all = view.findViewById(R.id.category_see_all_link);\r\n        cat_see_all.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent intent = new Intent(getActivity(), CategoryListActivity.class);\r\n                startActivity(intent);\r\n            }\r\n        });\r\n\r\n        //Recent Sell All Button ClickListner\r\n        TextView recent_see_all;\r\n        recent_see_all = view.findViewById(R.id.recent_see_all_link);\r\n        recent_see_all.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                Intent intent = new Intent(getActivity(), RecentListActivity.class);\r\n                startActivity(intent);\r\n            }\r\n        });\r\n        return view;\r\n    }\r\n\r\n    //Changing Category List on click on each Category\r\n    @Override\r\n    public void onItemClick(int position) {\r\n        if(cat_list.get(position)==\"Cook\"){\r\n            sp_list.clear();\r\n            adapter.notifyItemRemoved(position);\r\n            sp_list.addAll(sp_list_Cook);\r\n            adapter.notifyDataSetChanged();\r\n\r\n        }\r\n        if(cat_list.get(position)==\"Driver\"){\r\n            sp_list.clear();\r\n            adapter.notifyItemRemoved(position);\r\n            sp_list.addAll(sp_list_Driver);\r\n            adapter.notifyDataSetChanged();\r\n\r\n        }\r\n        if(cat_list.get(position)==\"Maid\"){\r\n            sp_list.clear();\r\n            adapter.notifyItemRemoved(position);\r\n            sp_list.addAll(sp_list_Maid);\r\n            adapter.notifyDataSetChanged();\r\n        }\r\n        if(cat_list.get(position)==\"Gardner\"){\r\n            sp_list.clear();\r\n            adapter.notifyItemRemoved(position);\r\n            sp_list.addAll(sp_list_Gardner);\r\n            adapter.notifyDataSetChanged();\r\n        }\r\n        if(cat_list.get(position)==\"Baby Sitter\"){\r\n            sp_list.clear();\r\n            adapter.notifyItemRemoved(position);\r\n            sp_list.addAll(sp_list_Baby_Sitter);\r\n            adapter.notifyDataSetChanged();\r\n        }\r\n\r\n    }\r\n\r\n    //Service Provider ClickListner & Passing Values\r\n    @Override\r\n    public void onSpItemClick(int position) {\r\n\r\n        String title = sp_list.get(position).getTitle();\r\n        String rating = sp_list.get(position).getRating();\r\n        String info = sp_list.get(position).getInfo();\r\n        int image = sp_list.get(position).getImage();\r\n        Intent intent = new Intent(getActivity(), BookActivity.class);\r\n        intent.putExtra(\"title\",title);\r\n        intent.putExtra(\"rating\",rating);\r\n        intent.putExtra(\"info\",info);\r\n        intent.putExtra(\"profile\",image);\r\n\r\n        startActivity(intent);\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/rajat/projecta/Fragment/HomeFragment.java	(revision bf9af3507d5443dbd49b7fd4263bb1659fa4b28c)
++++ app/src/main/java/com/rajat/projecta/Fragment/HomeFragment.java	(date 1617549648029)
+@@ -166,6 +166,7 @@
+         intent.putExtra("info",info);
+         intent.putExtra("profile",image);
+ 
++
+         startActivity(intent);
+     }
+ 
+Index: app/src/main/res/layout/activity_main.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<androidx.constraintlayout.widget.ConstraintLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    xmlns:app=\"http://schemas.android.com/apk/res-auto\"\r\n    xmlns:tools=\"http://schemas.android.com/tools\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    android:background=\"@android:color/white\"\r\n    android:scrollbarAlwaysDrawVerticalTrack=\"true\"\r\n    tools:context=\".MainActivity\">\r\n\r\n    <ScrollView\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"match_parent\"\r\n        android:scrollIndicators=\"right\"\r\n        android:scrollbars=\"vertical\"\r\n        android:verticalScrollbarPosition=\"right\"\r\n        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n        app:layout_constraintEnd_toEndOf=\"parent\"\r\n        app:layout_constraintStart_toStartOf=\"parent\"\r\n        app:layout_constraintTop_toTopOf=\"parent\">\r\n\r\n        <LinearLayout\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:orientation=\"vertical\" >\r\n\r\n            <TextView\r\n                android:id=\"@+id/display_text\"\r\n                android:layout_width=\"wrap_content\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginLeft=\"10dp\"\r\n                android:layout_marginTop=\"15dp\"\r\n                android:layout_marginBottom=\"15dp\"\r\n                android:text=\"Just a step left >\"\r\n                android:textColor=\"@android:color/black\"\r\n                android:textSize=\"18sp\"\r\n                android:textStyle=\"bold\" />\r\n\r\n            <androidx.cardview.widget.CardView\r\n                android:id=\"@+id/cardView\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_margin=\"10dp\"\r\n                android:background=\"@color/black\"\r\n                app:cardCornerRadius=\"15dp\">\r\n\r\n                <androidx.constraintlayout.widget.ConstraintLayout\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"match_parent\">\r\n\r\n                    <EditText\r\n                        android:id=\"@+id/name\"\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:ems=\"10\"\r\n                        android:hint=\"Enter Your Name\"\r\n                        android:inputType=\"textPersonName\"\r\n                        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                        app:layout_constraintEnd_toEndOf=\"parent\"\r\n                        app:layout_constraintHorizontal_bias=\"0.074\"\r\n                        app:layout_constraintStart_toStartOf=\"parent\"\r\n                        app:layout_constraintTop_toBottomOf=\"@+id/name_head\"\r\n                        app:layout_constraintVertical_bias=\"0.0\" />\r\n\r\n                    <TextView\r\n                        android:id=\"@+id/name_head\"\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:paddingLeft=\"0dp\"\r\n                        android:paddingTop=\"10dp\"\r\n                        android:paddingRight=\"10dp\"\r\n                        android:paddingBottom=\"10dp\"\r\n                        android:text=\"Name >\"\r\n                        android:textColor=\"@color/black\"\r\n                        android:textSize=\"16sp\"\r\n                        android:textStyle=\"bold\"\r\n                        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                        app:layout_constraintEnd_toEndOf=\"parent\"\r\n                        app:layout_constraintHorizontal_bias=\"0.049\"\r\n                        app:layout_constraintStart_toStartOf=\"parent\"\r\n                        app:layout_constraintTop_toTopOf=\"parent\"\r\n                        app:layout_constraintVertical_bias=\"0.038\" />\r\n                </androidx.constraintlayout.widget.ConstraintLayout>\r\n\r\n            </androidx.cardview.widget.CardView>\r\n\r\n            <androidx.cardview.widget.CardView\r\n                android:id=\"@+id/cardView2\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_margin=\"10dp\"\r\n                app:cardCornerRadius=\"15dp\">\r\n\r\n                <androidx.constraintlayout.widget.ConstraintLayout\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"88dp\">\r\n\r\n                    <TextView\r\n                        android:id=\"@+id/dob_head\"\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:paddingLeft=\"0dp\"\r\n                        android:paddingTop=\"10dp\"\r\n                        android:paddingRight=\"10dp\"\r\n                        android:paddingBottom=\"10dp\"\r\n                        android:text=\"D.O.B. >\"\r\n                        android:textColor=\"@color/black\"\r\n                        android:textSize=\"16sp\"\r\n                        android:textStyle=\"bold\"\r\n                        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                        app:layout_constraintEnd_toEndOf=\"parent\"\r\n                        app:layout_constraintHorizontal_bias=\"0.049\"\r\n                        app:layout_constraintStart_toStartOf=\"parent\"\r\n                        app:layout_constraintTop_toTopOf=\"parent\"\r\n                        app:layout_constraintVertical_bias=\"0.038\" />\r\n\r\n                    <EditText\r\n                        android:id=\"@+id/editTextDate\"\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:ems=\"10\"\r\n                        android:inputType=\"date\"\r\n                        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                        app:layout_constraintEnd_toEndOf=\"parent\"\r\n                        app:layout_constraintHorizontal_bias=\"0.074\"\r\n                        app:layout_constraintStart_toStartOf=\"parent\"\r\n                        app:layout_constraintTop_toBottomOf=\"@+id/dob_head\"\r\n                        app:layout_constraintVertical_bias=\"0.0\" />\r\n                </androidx.constraintlayout.widget.ConstraintLayout>\r\n            </androidx.cardview.widget.CardView>\r\n\r\n            <androidx.cardview.widget.CardView\r\n                android:id=\"@+id/cardView3\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_margin=\"10dp\"\r\n                app:cardCornerRadius=\"15dp\">\r\n\r\n                <androidx.constraintlayout.widget.ConstraintLayout\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"match_parent\">\r\n\r\n                    <TextView\r\n                        android:id=\"@+id/AddressHead\"\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:paddingLeft=\"0dp\"\r\n                        android:paddingTop=\"10dp\"\r\n                        android:paddingRight=\"10dp\"\r\n                        android:paddingBottom=\"10dp\"\r\n                        android:text=\"Address >\"\r\n                        android:textColor=\"@color/black\"\r\n                        android:textSize=\"16sp\"\r\n                        android:textStyle=\"bold\"\r\n                        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                        app:layout_constraintEnd_toEndOf=\"parent\"\r\n                        app:layout_constraintHorizontal_bias=\"0.051\"\r\n                        app:layout_constraintStart_toStartOf=\"parent\"\r\n                        app:layout_constraintTop_toTopOf=\"parent\"\r\n                        app:layout_constraintVertical_bias=\"0.0\" />\r\n\r\n                    <EditText\r\n                        android:id=\"@+id/editTextTextPostalAddress\"\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:ems=\"15\"\r\n                        android:hint=\"Enter Your Address\"\r\n                        android:inputType=\"textPostalAddress\"\r\n                        android:nestedScrollingEnabled=\"true\"\r\n                        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                        app:layout_constraintEnd_toEndOf=\"parent\"\r\n                        app:layout_constraintHorizontal_bias=\"0.094\"\r\n                        app:layout_constraintStart_toStartOf=\"parent\"\r\n                        app:layout_constraintTop_toBottomOf=\"@+id/AddressHead\"\r\n                        app:layout_constraintVertical_bias=\"0.0\" />\r\n                </androidx.constraintlayout.widget.ConstraintLayout>\r\n            </androidx.cardview.widget.CardView>\r\n\r\n            <androidx.cardview.widget.CardView\r\n                android:id=\"@+id/cardView4\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_margin=\"10dp\"\r\n                app:cardCornerRadius=\"15sp\">\r\n\r\n                <androidx.constraintlayout.widget.ConstraintLayout\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"175dp\">\r\n\r\n                    <TextView\r\n                        android:id=\"@+id/aadharHead\"\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:paddingLeft=\"0dp\"\r\n                        android:paddingTop=\"10dp\"\r\n                        android:paddingRight=\"10dp\"\r\n                        android:paddingBottom=\"10dp\"\r\n                        android:text=\"Aadhar Card >\"\r\n                        android:textColor=\"@color/black\"\r\n                        android:textSize=\"16sp\"\r\n                        android:textStyle=\"bold\"\r\n                        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                        app:layout_constraintEnd_toEndOf=\"parent\"\r\n                        app:layout_constraintHorizontal_bias=\"0.059\"\r\n                        app:layout_constraintStart_toStartOf=\"parent\"\r\n                        app:layout_constraintTop_toTopOf=\"parent\"\r\n                        app:layout_constraintVertical_bias=\"0.0\" />\r\n\r\n                    <EditText\r\n                        android:id=\"@+id/aadharNumber\"\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:ems=\"12\"\r\n                        android:inputType=\"number\"\r\n                        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                        app:layout_constraintEnd_toEndOf=\"parent\"\r\n                        app:layout_constraintHorizontal_bias=\"0.093\"\r\n                        app:layout_constraintStart_toStartOf=\"parent\"\r\n                        app:layout_constraintTop_toBottomOf=\"@+id/aadharHead\"\r\n                        app:layout_constraintVertical_bias=\"0.0\" />\r\n\r\n                    <Button\r\n                        android:id=\"@+id/uploadAadhar\"\r\n                        android:layout_width=\"166dp\"\r\n                        android:layout_height=\"51dp\"\r\n                        android:layout_marginTop=\"40dp\"\r\n                        android:backgroundTint=\"@color/colorPrimary\"\r\n                        android:text=\"UPLOAD AADHAR\"\r\n                        android:textColor=\"@color/white\"\r\n                        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                        app:layout_constraintEnd_toEndOf=\"parent\"\r\n                        app:layout_constraintHorizontal_bias=\"0.07\"\r\n                        app:layout_constraintStart_toStartOf=\"parent\"\r\n                        app:layout_constraintTop_toBottomOf=\"@+id/aadharNumber\"\r\n                        app:layout_constraintVertical_bias=\"1.0\" />\r\n                </androidx.constraintlayout.widget.ConstraintLayout>\r\n            </androidx.cardview.widget.CardView>\r\n\r\n            <androidx.cardview.widget.CardView\r\n                android:id=\"@+id/cardView5\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_margin=\"10dp\"\r\n                app:cardCornerRadius=\"15dp\">\r\n\r\n                <androidx.constraintlayout.widget.ConstraintLayout\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"120dp\">\r\n\r\n                    <TextView\r\n                        android:id=\"@+id/mobileHead\"\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:paddingLeft=\"0dp\"\r\n                        android:paddingTop=\"10dp\"\r\n                        android:paddingRight=\"10dp\"\r\n                        android:paddingBottom=\"10dp\"\r\n                        android:text=\"Mobile No. >\"\r\n                        android:textColor=\"@color/black\"\r\n                        android:textSize=\"16sp\"\r\n                        android:textStyle=\"bold\"\r\n                        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                        app:layout_constraintEnd_toEndOf=\"parent\"\r\n                        app:layout_constraintHorizontal_bias=\"0.046\"\r\n                        app:layout_constraintStart_toStartOf=\"parent\"\r\n                        app:layout_constraintTop_toTopOf=\"parent\"\r\n                        app:layout_constraintVertical_bias=\"0.025\" />\r\n\r\n                    <EditText\r\n                        android:id=\"@+id/mobile\"\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:ems=\"10\"\r\n                        android:inputType=\"phone\"\r\n                        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                        app:layout_constraintEnd_toEndOf=\"parent\"\r\n                        app:layout_constraintHorizontal_bias=\"0.066\"\r\n                        app:layout_constraintStart_toStartOf=\"parent\"\r\n                        app:layout_constraintTop_toBottomOf=\"@+id/mobileHead\"\r\n                        app:layout_constraintVertical_bias=\"0.0\" />\r\n                </androidx.constraintlayout.widget.ConstraintLayout>\r\n            </androidx.cardview.widget.CardView>\r\n\r\n            <androidx.cardview.widget.CardView\r\n                android:id=\"@+id/cardView6\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_margin=\"10dp\"\r\n                app:cardCornerRadius=\"15dp\">\r\n\r\n                <androidx.constraintlayout.widget.ConstraintLayout\r\n                    android:layout_width=\"match_parent\"\r\n                    android:layout_height=\"89dp\">\r\n\r\n                    <TextView\r\n                        android:id=\"@+id/PaymentHead\"\r\n                        android:layout_width=\"wrap_content\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:paddingLeft=\"0dp\"\r\n                        android:paddingTop=\"10dp\"\r\n                        android:paddingRight=\"10dp\"\r\n                        android:paddingBottom=\"10dp\"\r\n                        android:text=\"Payment Mode >\"\r\n                        android:textColor=\"@color/black\"\r\n                        android:textSize=\"16sp\"\r\n                        android:textStyle=\"bold\"\r\n                        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                        app:layout_constraintEnd_toEndOf=\"parent\"\r\n                        app:layout_constraintHorizontal_bias=\"0.039\"\r\n                        app:layout_constraintStart_toStartOf=\"parent\"\r\n                        app:layout_constraintTop_toTopOf=\"parent\"\r\n                        app:layout_constraintVertical_bias=\"0.042\" />\r\n\r\n                    <androidx.cardview.widget.CardView\r\n                        android:layout_width=\"match_parent\"\r\n                        android:layout_height=\"wrap_content\"\r\n                        android:layout_marginLeft=\"10dp\"\r\n                        android:layout_marginTop=\"10dp\"\r\n                        android:layout_marginRight=\"10dp\"\r\n                        android:layout_marginBottom=\"10dp\"\r\n                        app:layout_constraintBottom_toBottomOf=\"parent\"\r\n                        app:layout_constraintEnd_toEndOf=\"parent\"\r\n                        app:layout_constraintStart_toStartOf=\"parent\"\r\n                        app:layout_constraintTop_toBottomOf=\"@+id/PaymentHead\" />\r\n                </androidx.constraintlayout.widget.ConstraintLayout>\r\n            </androidx.cardview.widget.CardView>\r\n\r\n            <Button\r\n                android:id=\"@+id/submitBtnFirstPage\"\r\n                android:layout_width=\"match_parent\"\r\n                android:layout_height=\"wrap_content\"\r\n                android:layout_marginLeft=\"25dp\"\r\n                android:layout_marginRight=\"25dp\"\r\n                android:backgroundTint=\"@color/colorPrimary\"\r\n                android:text=\"Submit\"\r\n                android:textColor=\"@color/white\" />\r\n\r\n        </LinearLayout>\r\n    </ScrollView>\r\n\r\n</androidx.constraintlayout.widget.ConstraintLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_main.xml	(revision bf9af3507d5443dbd49b7fd4263bb1659fa4b28c)
++++ app/src/main/res/layout/activity_main.xml	(date 1617549009481)
+@@ -115,7 +115,7 @@
+                         app:layout_constraintVertical_bias="0.038" />
+ 
+                     <EditText
+-                        android:id="@+id/editTextDate"
++                        android:id="@+id/dob"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:ems="10"
+@@ -160,7 +160,7 @@
+                         app:layout_constraintVertical_bias="0.0" />
+ 
+                     <EditText
+-                        android:id="@+id/editTextTextPostalAddress"
++                        android:id="@+id/address"
+                         android:layout_width="wrap_content"
+                         android:layout_height="wrap_content"
+                         android:ems="15"
+Index: app/src/main/res/layout/activity_categorylist.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<RelativeLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"wrap_content\">\r\n    <RelativeLayout\r\n        android:id=\"@+id/category_list_part1\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_alignParentTop=\"true\"\r\n        android:layout_marginTop=\"15dp\"\r\n        android:padding=\"8dp\">\r\n        <ImageView\r\n            android:layout_width=\"30dp\"\r\n            android:layout_height=\"30dp\"\r\n            android:layout_alignParentLeft=\"true\"\r\n            android:layout_marginLeft=\"25dp\"\r\n            android:src=\"@drawable/profile_user\"\r\n            />\r\n        <TextView\r\n            android:layout_width=\"wrap_content\"\r\n            android:layout_height=\"30dp\"\r\n            android:layout_alignParentLeft=\"true\"\r\n            android:layout_marginLeft=\"60dp\"\r\n            android:gravity=\"center\"\r\n            android:paddingLeft=\"15dp\"\r\n            android:paddingRight=\"15dp\"\r\n            android:text=\"User\"\r\n            android:textSize=\"18sp\"\r\n            android:textColor=\"@color/white\"\r\n            android:background=\"@drawable/bg_classic\"/>\r\n    </RelativeLayout>\r\n\r\n    <androidx.recyclerview.widget.RecyclerView\r\n        android:id=\"@+id/sp_full_list\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_below=\"@+id/category_list_part1\"\r\n        android:layout_marginTop=\"15dp\"\r\n        >\r\n\r\n    </androidx.recyclerview.widget.RecyclerView>\r\n</RelativeLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/activity_categorylist.xml	(revision bf9af3507d5443dbd49b7fd4263bb1659fa4b28c)
++++ app/src/main/res/layout/activity_categorylist.xml	(date 1617548553300)
+@@ -17,6 +17,7 @@
+             android:src="@drawable/profile_user"
+             />
+         <TextView
++            android:id="@+id/atTopName_all"
+             android:layout_width="wrap_content"
+             android:layout_height="30dp"
+             android:layout_alignParentLeft="true"

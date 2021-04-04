@@ -166,6 +166,7 @@ public class HomeFragment extends Fragment implements CategoryAdapter.Categorycl
         intent.putExtra("info",info);
         intent.putExtra("profile",image);
 
+
         startActivity(intent);
     }
 
