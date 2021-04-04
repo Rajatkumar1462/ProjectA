@@ -17,13 +17,8 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.rajat.projecta.Adapter.CategoryAdapter;
 import com.rajat.projecta.Adapter.ServiceProviderAdapter;
 import com.rajat.projecta.BookActivity;
@@ -33,15 +28,13 @@ import com.rajat.projecta.R;
 import com.rajat.projecta.RecentListActivity;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
 
 public class HomeFragment extends Fragment implements CategoryAdapter.CategoryclickInterface, ServiceProviderAdapter.ServiceproviderClickInterface {
     //Declaration
     private TextView AtTopName;
     ArrayList<String> cat_list = new ArrayList<>();
-    static ArrayList<ServiceProviderHelper> sp_list = new ArrayList<>();
-    static ArrayList<ServiceProviderHelper> sp_list_Cook = new ArrayList<>();
+    ArrayList<ServiceProviderHelper> sp_list = new ArrayList<>();
+    ArrayList<ServiceProviderHelper> sp_list_Cook = new ArrayList<>();
     ArrayList<ServiceProviderHelper> sp_list_Driver = new ArrayList<>();
     ArrayList<ServiceProviderHelper> sp_list_Maid = new ArrayList<>();
     ArrayList<ServiceProviderHelper> sp_list_Gardner = new ArrayList<>();
@@ -80,7 +73,6 @@ public class HomeFragment extends Fragment implements CategoryAdapter.Categorycl
         sp_list_Cook.add(new ServiceProviderHelper(R.drawable.cook,"Suresh","5 star","3 year Experience"));
         sp_list_Cook.add(new ServiceProviderHelper(R.drawable.cook,"Mamta Devi","4.7 star","1 year Experience"));
         sp_list_Cook.add(new ServiceProviderHelper(R.drawable.cook,"Gopal","3.7 star","6 Month Experience"));
-        sp_list.clear();
         sp_list.addAll(sp_list_Cook);
 
         sp_list_Driver.add(new ServiceProviderHelper(R.drawable.driver,"Basant","4.8 star","2.5 year Experience"));
