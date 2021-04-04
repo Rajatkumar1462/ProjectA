@@ -26,6 +26,7 @@
             android:paddingRight="15dp"
             android:text="User"
             android:textSize="18sp"
+            android:textColor="@color/white"
             android:background="@drawable/bg_classic"/>
     </RelativeLayout>
 
