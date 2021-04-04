@@ -5,18 +5,23 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
 import com.rajat.projecta.Adapter.CategoryAdapter;
 import com.rajat.projecta.Adapter.ServiceProviderAdapter;
 import com.rajat.projecta.BookActivity;
 import com.rajat.projecta.CategoryListActivity;
 import com.rajat.projecta.Helper.ServiceProviderHelper;
+import com.rajat.projecta.MainActivity;
 import com.rajat.projecta.R;
 import com.rajat.projecta.RecentListActivity;
 
@@ -24,18 +29,25 @@ import java.util.ArrayList;
 
 public class HomeFragment extends Fragment implements CategoryAdapter.CategoryclickInterface, ServiceProviderAdapter.ServiceproviderClickInterface {
     //Declaration
+    private TextView AtTopName;
     ArrayList<String> cat_list = new ArrayList<>();
     ArrayList<ServiceProviderHelper> sp_list = new ArrayList<>();
     ArrayList<ServiceProviderHelper> sp_list_Driver = new ArrayList<>();
     ArrayList<ServiceProviderHelper> sp_list_Maid = new ArrayList<>();
     ArrayList<ServiceProviderHelper> sp_list_Gardner = new ArrayList<>();
     ServiceProviderAdapter adapter;
+    FirebaseUser user;
 
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_home,container,false);
+        user = FirebaseAuth.getInstance().getCurrentUser();
+        //settingDisplayName
+        AtTopName = view.findViewById(R.id.atTopName);
+//        String nameFromMainActivity = MainActivity.getName();
+        AtTopName.setText(user.getDisplayName());
 
         //RecyclerView For Displaying Categories list Horizontal
         RecyclerView category_list = view.findViewById(R.id.category_list);

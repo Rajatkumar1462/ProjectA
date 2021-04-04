@@ -13,16 +13,17 @@
         android:theme="@style/AppTheme">
         <activity android:name=".FragmentActivity"
             android:theme="@style/AppTheme.NoActionBar">
+        </activity>
+        <activity android:name=".MainActivity" android:theme="@style/AppTheme2"/>
+        <activity android:name=".BookActivity"/>
+        <activity android:name=".CategoryListActivity"/>
+        <activity android:name=".RegisterActivity" android:theme="@style/AppTheme2"/>
+        <activity android:name=".LoginActivity" android:theme="@style/AppTheme2">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".BookActivity"/>
-        <activity android:name=".CategoryListActivity"/>
-        <activity android:name=".RegisterActivity"/>
-        <activity android:name=".LoginActivity"/>
         <activity android:name=".RecentListActivity"/>
     </application>
 

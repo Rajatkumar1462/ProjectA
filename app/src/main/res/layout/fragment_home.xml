@@ -17,17 +17,19 @@
             android:layout_marginLeft="25dp"
             android:src="@drawable/profile_user"
             />
+
         <TextView
+            android:id="@+id/atTopName"
             android:layout_width="wrap_content"
             android:layout_height="30dp"
             android:layout_alignParentLeft="true"
             android:layout_marginLeft="60dp"
+            android:background="@drawable/bg_classic"
             android:gravity="center"
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:text="User"
-            android:textSize="18sp"
-            android:background="@drawable/bg_classic"/>
+            android:textSize="18sp" />
 
     </RelativeLayout>
 
