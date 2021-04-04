@@ -52,6 +52,7 @@ public class RegisterActivity extends AppCompatActivity {
 
         // checking if user already logged in or not
         if(isLoggedIn()){
+            Toast.makeText(this, "Welcome "+mAuth.getCurrentUser().getDisplayName(), Toast.LENGTH_SHORT).show();
             startActivity(new Intent(getApplicationContext(), FragmentActivity.class));
             finish();
         }
@@ -188,7 +189,7 @@ public class RegisterActivity extends AppCompatActivity {
     //updating if user successfully registered
     public void updateUI(FirebaseUser user) {
         if(user != null) {
-            Toast.makeText(this, "Welcome "+user.getEmail(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, "Welcome "+user.getDisplayName(), Toast.LENGTH_SHORT).show();
             startActivity(new Intent(getApplicationContext(), MainActivity.class));
             finish();
         } else {
