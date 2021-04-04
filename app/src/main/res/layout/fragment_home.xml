@@ -29,6 +29,7 @@
             android:paddingLeft="15dp"
             android:paddingRight="15dp"
             android:text="User"
+            android:textColor="@color/white"
             android:textSize="18sp" />
 
     </RelativeLayout>
@@ -113,14 +114,16 @@
             android:layout_marginTop="5dp"
             android:padding="8dp"
             android:src="@drawable/home" />
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Order Info"
+            android:layout_marginLeft="30dp"
             android:layout_toRightOf="@+id/recent_image"
             android:padding="16dp"
-            android:layout_marginLeft="30dp"
-            android:textSize="24sp"/>
+            android:text="Order Info"
+            android:textColor="@color/white"
+            android:textSize="24sp" />
 
     </RelativeLayout>
 

@@ -22,8 +22,9 @@
         android:layout_alignParentBottom="true"
         android:layout_marginStart="110dp"
         android:layout_marginBottom="100dp"
-        android:text="Name"
         android:gravity="center_horizontal"
+        android:text="Name"
+        android:textColor="@color/white"
         android:textSize="20sp" />
 
     <TextView
@@ -36,6 +37,7 @@
         android:layout_marginBottom="58dp"
         android:gravity="center_horizontal"
         android:text="Rating"
+        android:textColor="@color/white"
         android:textSize="20sp" />
 
     <TextView
@@ -47,6 +49,7 @@
         android:layout_marginStart="10dp"
         android:layout_marginTop="95dp"
         android:text="Info"
+        android:textColor="@color/white"
         android:textSize="18sp" />
 
     </RelativeLayout>
