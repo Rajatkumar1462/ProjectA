@@ -20,42 +20,52 @@
         android:layout_marginBottom="10dp"
         android:padding="20dp"
         >
+
         <TextView
+            android:id="@+id/me_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:hint="Name"
-            android:textSize="22sp"
-            android:layout_marginBottom="10dp"/>
+            android:textSize="22sp" />
+
         <TextView
+            android:id="@+id/me_email"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:hint="Email"
-            android:textSize="22sp"
-            android:layout_marginBottom="10dp"/>
+            android:textSize="22sp" />
+
         <TextView
+            android:id="@+id/me_address"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:hint="Address"
-            android:textSize="22sp"
-            android:layout_marginBottom="10dp"/>
+            android:textSize="22sp" />
+
         <TextView
+            android:id="@+id/me_kyc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:hint="KYC"
-            android:textSize="22sp"
-            android:layout_marginBottom="10dp"/>
+            android:textSize="22sp" />
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Payment Mode"
             android:textSize="22sp"
             android:layout_marginBottom="10dp"/>
+
         <TextView
+            android:id="@+id/me_orders"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="10dp"
             android:hint="Orders"
-            android:textSize="22sp"
-            android:layout_marginBottom="10dp"/>
+            android:textSize="22sp" />
 
     </LinearLayout>
 
