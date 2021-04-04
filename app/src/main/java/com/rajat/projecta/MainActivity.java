@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText address;
     private EditText aadharNumber;
     private EditText mobile;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

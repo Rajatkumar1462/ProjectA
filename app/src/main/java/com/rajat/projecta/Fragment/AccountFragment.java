@@ -49,7 +49,6 @@ public class AccountFragment extends Fragment {
         meEmail = view.findViewById(R.id.me_email);
         meAddress = view.findViewById(R.id.me_address);
         meKyc = view.findViewById(R.id.me_kyc);
-        meOrder = view.findViewById(R.id.me_orders);
 
 
         //setting values in account fragment from firebase
@@ -57,7 +56,6 @@ public class AccountFragment extends Fragment {
         updateValues("Email", meEmail);
         updateValues("Address", meAddress);
         updateValues("KYC", meKyc);
-        updateValues("Orders", meOrder);
 
 //        meName.setText((CharSequence) FirebaseAuth.getInstance().getCurrentUser().getDisplayName());
 

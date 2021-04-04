@@ -113,7 +113,7 @@
             android:layout_height="80dp"
             android:layout_marginTop="5dp"
             android:padding="8dp"
-            android:src="@drawable/home" />
+            android:src="@drawable/recent_list" />
 
         <TextView
             android:layout_width="wrap_content"

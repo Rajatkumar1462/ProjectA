@@ -8,6 +8,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -28,7 +29,6 @@ import com.rajat.projecta.Adapter.ServiceProviderAdapter;
 import com.rajat.projecta.BookActivity;
 import com.rajat.projecta.CategoryListActivity;
 import com.rajat.projecta.Helper.ServiceProviderHelper;
-import com.rajat.projecta.MainActivity;
 import com.rajat.projecta.R;
 import com.rajat.projecta.RecentListActivity;
 
@@ -46,6 +46,7 @@ public class HomeFragment extends Fragment implements CategoryAdapter.Categorycl
     ArrayList<ServiceProviderHelper> sp_list_Maid = new ArrayList<>();
     ArrayList<ServiceProviderHelper> sp_list_Gardner = new ArrayList<>();
     ArrayList<ServiceProviderHelper> sp_list_Baby_Sitter = new ArrayList<>();
+
     ServiceProviderAdapter adapter;
     FirebaseUser user;
     RecyclerView serviceprovider_list;
@@ -68,7 +69,7 @@ public class HomeFragment extends Fragment implements CategoryAdapter.Categorycl
         //Values are declared here
         cat_list.add("Cook"); cat_list.add("Driver");
         cat_list.add("Maid"); cat_list.add("Gardner");
-        cat_list.add("BabySitter");
+        cat_list.add("Baby Sitter");
         category_list.setAdapter(new CategoryAdapter(cat_list, (CategoryAdapter.CategoryclickInterface) this));
 
         //RecyclerView For Displaying ServiceProvider list Horizontal
@@ -79,6 +80,7 @@ public class HomeFragment extends Fragment implements CategoryAdapter.Categorycl
         sp_list_Cook.add(new ServiceProviderHelper(R.drawable.cook,"Suresh","5 star","3 year Experience"));
         sp_list_Cook.add(new ServiceProviderHelper(R.drawable.cook,"Mamta Devi","4.7 star","1 year Experience"));
         sp_list_Cook.add(new ServiceProviderHelper(R.drawable.cook,"Gopal","3.7 star","6 Month Experience"));
+        sp_list.clear();
         sp_list.addAll(sp_list_Cook);
 
         sp_list_Driver.add(new ServiceProviderHelper(R.drawable.driver,"Basant","4.8 star","2.5 year Experience"));
