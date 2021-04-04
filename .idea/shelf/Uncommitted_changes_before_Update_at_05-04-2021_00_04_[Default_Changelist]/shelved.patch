@@ -1,0 +1,113 @@
+Index: app/src/main/java/com/rajat/projecta/Fragment/AccountFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.rajat.projecta.Fragment;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.Button;\r\n\r\nimport androidx.annotation.Nullable;\r\nimport androidx.fragment.app.Fragment;\r\n\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.rajat.projecta.FragmentActivity;\r\nimport com.rajat.projecta.LoginActivity;\r\nimport com.rajat.projecta.MainActivity;\r\nimport com.rajat.projecta.R;\r\n\r\npublic class AccountFragment extends Fragment {\r\n    @Nullable\r\n    private Button meSignOut;\r\n    private Button meEdit;\r\n\r\n\r\n    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {\r\n        View view = inflater.inflate(R.layout.fragment_account,container,false);\r\n        meSignOut = view.findViewById(R.id.me_signout);\r\n        meEdit = view.findViewById(R.id.me_edit);\r\n        meSignOut.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                signOut();\r\n            }\r\n        });\r\n        meEdit.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent intent = new Intent(getActivity(), MainActivity.class);\r\n                intent.putExtra(\"UserId\", FirebaseAuth.getInstance().getCurrentUser().getDisplayName());\r\n                startActivity(intent);\r\n            }\r\n        });\r\n\r\n        return view;\r\n    }\r\n\r\n    private void signOut(){\r\n        FirebaseAuth.getInstance().signOut();\r\n        startActivity(new Intent(getActivity(), LoginActivity.class));\r\n    }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/rajat/projecta/Fragment/AccountFragment.java	(revision 4cc6258c9064daa94cbf10e4ce3a823e2c746d2d)
++++ app/src/main/java/com/rajat/projecta/Fragment/AccountFragment.java	(date 1617561138448)
+@@ -11,8 +11,6 @@
+ import androidx.fragment.app.Fragment;
+ 
+ import com.google.firebase.auth.FirebaseAuth;
+-import com.google.firebase.auth.FirebaseUser;
+-import com.rajat.projecta.FragmentActivity;
+ import com.rajat.projecta.LoginActivity;
+ import com.rajat.projecta.MainActivity;
+ import com.rajat.projecta.R;
+Index: app/src/main/res/layout/fragment_account.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"utf-8\"?>\r\n<RelativeLayout xmlns:android=\"http://schemas.android.com/apk/res/android\"\r\n    android:layout_width=\"match_parent\"\r\n    android:layout_height=\"match_parent\"\r\n    >\r\n    <ImageView\r\n        android:id=\"@+id/me_profile\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"100dp\"\r\n        android:layout_marginTop=\"50dp\"\r\n        android:src=\"@drawable/profile_user\"\r\n        />\r\n    <LinearLayout\r\n        android:id=\"@+id/me_info\"\r\n        android:orientation=\"vertical\"\r\n        android:layout_width=\"match_parent\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_below=\"@+id/me_profile\"\r\n        android:layout_marginTop=\"10dp\"\r\n        android:layout_marginBottom=\"10dp\"\r\n        android:padding=\"20dp\"\r\n        >\r\n        <TextView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:hint=\"Name\"\r\n            android:textSize=\"22sp\"\r\n            android:layout_marginBottom=\"10dp\"/>\r\n        <TextView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:hint=\"Email\"\r\n            android:textSize=\"22sp\"\r\n            android:layout_marginBottom=\"10dp\"/>\r\n        <TextView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:hint=\"Address\"\r\n            android:textSize=\"22sp\"\r\n            android:layout_marginBottom=\"10dp\"/>\r\n        <TextView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:hint=\"KYC\"\r\n            android:textSize=\"22sp\"\r\n            android:layout_marginBottom=\"10dp\"/>\r\n        <TextView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:hint=\"Payment Mode\"\r\n            android:textSize=\"22sp\"\r\n            android:layout_marginBottom=\"10dp\"/>\r\n        <TextView\r\n            android:layout_width=\"match_parent\"\r\n            android:layout_height=\"wrap_content\"\r\n            android:hint=\"Orders\"\r\n            android:textSize=\"22sp\"\r\n            android:layout_marginBottom=\"10dp\"/>\r\n\r\n    </LinearLayout>\r\n\r\n    <Button\r\n        android:id=\"@+id/me_signout\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_below=\"@+id/me_info\"\r\n        android:layout_marginLeft=\"200dp\"\r\n        android:background=\"#6200EE\"\r\n        android:padding=\"10dp\"\r\n        android:text=\"Sign Out\"\r\n        android:textColor=\"@color/white\"\r\n        android:textSize=\"18sp\" />\r\n\r\n    <Button\r\n        android:id=\"@+id/me_edit\"\r\n        android:layout_width=\"wrap_content\"\r\n        android:layout_height=\"wrap_content\"\r\n        android:layout_below=\"@+id/me_info\"\r\n        android:layout_marginLeft=\"50dp\"\r\n        android:background=\"@color/colorPrimary\"\r\n        android:padding=\"10dp\"\r\n        android:text=\"Edit\"\r\n        android:textColor=\"@color/white\"\r\n        android:textSize=\"18sp\" />\r\n\r\n</RelativeLayout>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/res/layout/fragment_account.xml	(revision 4cc6258c9064daa94cbf10e4ce3a823e2c746d2d)
++++ app/src/main/res/layout/fragment_account.xml	(date 1617551905652)
+@@ -50,12 +50,6 @@
+             android:hint="Payment Mode"
+             android:textSize="22sp"
+             android:layout_marginBottom="10dp"/>
+-        <TextView
+-            android:layout_width="match_parent"
+-            android:layout_height="wrap_content"
+-            android:hint="Orders"
+-            android:textSize="22sp"
+-            android:layout_marginBottom="10dp"/>
+ 
+     </LinearLayout>
+ 
+Index: app/src/main/java/com/rajat/projecta/Fragment/HomeFragment.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.rajat.projecta.Fragment;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.LayoutInflater;\r\nimport android.view.View;\r\nimport android.view.ViewGroup;\r\nimport android.widget.EditText;\r\nimport android.widget.TextView;\r\n\r\nimport androidx.annotation.Nullable;\r\nimport androidx.appcompat.app.AppCompatActivity;\r\nimport androidx.fragment.app.Fragment;\r\nimport androidx.recyclerview.widget.LinearLayoutManager;\r\nimport androidx.recyclerview.widget.RecyclerView;\r\n\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.rajat.projecta.Adapter.CategoryAdapter;\r\nimport com.rajat.projecta.Adapter.ServiceProviderAdapter;\r\nimport com.rajat.projecta.BookActivity;\r\nimport com.rajat.projecta.CategoryListActivity;\r\nimport com.rajat.projecta.Helper.ServiceProviderHelper;\r\nimport com.rajat.projecta.MainActivity;\r\nimport com.rajat.projecta.R;\r\nimport com.rajat.projecta.RecentListActivity;\r\n\r\nimport java.util.ArrayList;\r\n\r\npublic class HomeFragment extends Fragment implements CategoryAdapter.CategoryclickInterface, ServiceProviderAdapter.ServiceproviderClickInterface {\r\n    //Declaration\r\n    private TextView AtTopName;\r\n    ArrayList<String> cat_list = new ArrayList<>();\r\n    ArrayList<ServiceProviderHelper> sp_list = new ArrayList<>();\r\n    ArrayList<ServiceProviderHelper> sp_list_Cook = new ArrayList<>();\r\n    ArrayList<ServiceProviderHelper> sp_list_Driver = new ArrayList<>();\r\n    ArrayList<ServiceProviderHelper> sp_list_Maid = new ArrayList<>();\r\n    ArrayList<ServiceProviderHelper> sp_list_Gardner = new ArrayList<>();\r\n    ArrayList<ServiceProviderHelper> sp_list_Baby_Sitter = new ArrayList<>();\r\n    ServiceProviderAdapter adapter;\r\n    FirebaseUser user;\r\n\r\n    @Nullable\r\n    @Override\r\n    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {\r\n\r\n        View view = inflater.inflate(R.layout.fragment_home,container,false);\r\n        user = FirebaseAuth.getInstance().getCurrentUser();\r\n        //settingDisplayName\r\n        AtTopName = view.findViewById(R.id.atTopName);\r\n//        String nameFromMainActivity = MainActivity.getName();\r\n        AtTopName.setText(user.getDisplayName());\r\n\r\n        //RecyclerView For Displaying Categories list Horizontal\r\n        RecyclerView category_list = view.findViewById(R.id.category_list);\r\n        category_list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL,false));\r\n\r\n        //Values are declared here\r\n        cat_list.add(\"Cook\"); cat_list.add(\"Driver\");\r\n        cat_list.add(\"Maid\"); cat_list.add(\"Gardner\");\r\n        cat_list.add(\"Baby Sitter\");\r\n        category_list.setAdapter(new CategoryAdapter(cat_list, (CategoryAdapter.CategoryclickInterface) this));\r\n\r\n        //RecyclerView For Displaying ServiceProvider list Horizontal\r\n        RecyclerView serviceprovider_list = view.findViewById(R.id.service_provider_list);\r\n        serviceprovider_list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL,false));\r\n\r\n        //values are declared  here\r\n        sp_list_Cook.add(new ServiceProviderHelper(R.drawable.cook,\"Suresh\",\"5 star\",\"3 year Experience\"));\r\n        sp_list_Cook.add(new ServiceProviderHelper(R.drawable.cook,\"Mamta Devi\",\"4.7 star\",\"1 year Experience\"));\r\n        sp_list_Cook.add(new ServiceProviderHelper(R.drawable.cook,\"Gopal\",\"3.7 star\",\"6 Month Experience\"));\r\n        sp_list.addAll(sp_list_Cook);\r\n\r\n        sp_list_Driver.add(new ServiceProviderHelper(R.drawable.driver,\"Basant\",\"4.8 star\",\"2.5 year Experience\"));\r\n        sp_list_Driver.add(new ServiceProviderHelper(R.drawable.driver,\"Tahir\",\"4.5 star\",\"2 year Experience\"));\r\n        sp_list_Driver.add(new ServiceProviderHelper(R.drawable.driver,\"Rajiv Anna\",\"4.4 star\",\"1 year Experience\"));\r\n\r\n        sp_list_Maid.add(new ServiceProviderHelper(R.drawable.maid,\"Mala\",\"4.9 star\",\"5 year Experience\"));\r\n        sp_list_Maid.add(new ServiceProviderHelper(R.drawable.maid,\"Shakuntala\",\"4.8 star\",\"3.5 year Experience\"));\r\n        sp_list_Maid.add(new ServiceProviderHelper(R.drawable.maid,\"Ramu\",\"4.5 star\",\"2 year Experience\"));\r\n\r\n        sp_list_Gardner.add(new ServiceProviderHelper(R.drawable.gardner,\"Prakash\",\"4.5 star\",\"2 year Experience\"));\r\n        sp_list_Gardner.add(new ServiceProviderHelper(R.drawable.gardner,\"Raman\",\"4.4 star\",\"1 year Experience\"));\r\n        sp_list_Gardner.add(new ServiceProviderHelper(R.drawable.gardner,\"Shadique\",\"4.3 star\",\"New\"));\r\n\r\n        sp_list_Baby_Sitter.add(new ServiceProviderHelper(R.drawable.baby_sitter,\"Pragati\",\"4.5 star\",\"3 year Experience\"));\r\n        sp_list_Baby_Sitter.add(new ServiceProviderHelper(R.drawable.baby_sitter,\"Mohini\",\"4 star\",\"2 year Experience\"));\r\n        sp_list_Baby_Sitter.add(new ServiceProviderHelper(R.drawable.baby_sitter,\"Rohini\",\"3.8 star\",\"1 year Experience\"));\r\n\r\n        adapter = new ServiceProviderAdapter(sp_list, (ServiceProviderAdapter.ServiceproviderClickInterface) this);\r\n        serviceprovider_list.setAdapter(adapter);\r\n\r\n        //Category Sell All Button ClickListner\r\n        TextView cat_see_all;\r\n        cat_see_all = view.findViewById(R.id.category_see_all_link);\r\n        cat_see_all.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                Intent intent = new Intent(getActivity(), CategoryListActivity.class);\r\n                startActivity(intent);\r\n            }\r\n        });\r\n\r\n        //Recent Sell All Button ClickListner\r\n        TextView recent_see_all;\r\n        recent_see_all = view.findViewById(R.id.recent_see_all_link);\r\n        recent_see_all.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View v) {\r\n                Intent intent = new Intent(getActivity(), RecentListActivity.class);\r\n                startActivity(intent);\r\n            }\r\n        });\r\n        return view;\r\n    }\r\n\r\n    //Changing Category List on click on each Category\r\n    @Override\r\n    public void onItemClick(int position) {\r\n        if(cat_list.get(position)==\"Cook\"){\r\n            sp_list.clear();\r\n            adapter.notifyItemRemoved(position);\r\n            sp_list.addAll(sp_list_Cook);\r\n            adapter.notifyDataSetChanged();\r\n\r\n        }\r\n        if(cat_list.get(position)==\"Driver\"){\r\n            sp_list.clear();\r\n            adapter.notifyItemRemoved(position);\r\n            sp_list.addAll(sp_list_Driver);\r\n            adapter.notifyDataSetChanged();\r\n\r\n        }\r\n        if(cat_list.get(position)==\"Maid\"){\r\n            sp_list.clear();\r\n            adapter.notifyItemRemoved(position);\r\n            sp_list.addAll(sp_list_Maid);\r\n            adapter.notifyDataSetChanged();\r\n        }\r\n        if(cat_list.get(position)==\"Gardner\"){\r\n            sp_list.clear();\r\n            adapter.notifyItemRemoved(position);\r\n            sp_list.addAll(sp_list_Gardner);\r\n            adapter.notifyDataSetChanged();\r\n        }\r\n        if(cat_list.get(position)==\"Baby Sitter\"){\r\n            sp_list.clear();\r\n            adapter.notifyItemRemoved(position);\r\n            sp_list.addAll(sp_list_Baby_Sitter);\r\n            adapter.notifyDataSetChanged();\r\n        }\r\n\r\n    }\r\n\r\n    //Service Provider ClickListner & Passing Values\r\n    @Override\r\n    public void onSpItemClick(int position) {\r\n\r\n        String title = sp_list.get(position).getTitle();\r\n        String rating = sp_list.get(position).getRating();\r\n        String info = sp_list.get(position).getInfo();\r\n        int image = sp_list.get(position).getImage();\r\n        Intent intent = new Intent(getActivity(), BookActivity.class);\r\n        intent.putExtra(\"title\",title);\r\n        intent.putExtra(\"rating\",rating);\r\n        intent.putExtra(\"info\",info);\r\n        intent.putExtra(\"profile\",image);\r\n\r\n\r\n        startActivity(intent);\r\n    }\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/rajat/projecta/Fragment/HomeFragment.java	(revision 4cc6258c9064daa94cbf10e4ce3a823e2c746d2d)
++++ app/src/main/java/com/rajat/projecta/Fragment/HomeFragment.java	(date 1617560952093)
+@@ -2,11 +2,13 @@
+ 
+ import android.content.Intent;
+ import android.os.Bundle;
++import android.util.Log;
+ import android.view.LayoutInflater;
+ import android.view.View;
+ import android.view.ViewGroup;
+ import android.widget.EditText;
+ import android.widget.TextView;
++import android.widget.Toast;
+ 
+ import androidx.annotation.Nullable;
+ import androidx.appcompat.app.AppCompatActivity;
+@@ -21,7 +23,6 @@
+ import com.rajat.projecta.BookActivity;
+ import com.rajat.projecta.CategoryListActivity;
+ import com.rajat.projecta.Helper.ServiceProviderHelper;
+-import com.rajat.projecta.MainActivity;
+ import com.rajat.projecta.R;
+ import com.rajat.projecta.RecentListActivity;
+ 
+@@ -37,6 +38,7 @@
+     ArrayList<ServiceProviderHelper> sp_list_Maid = new ArrayList<>();
+     ArrayList<ServiceProviderHelper> sp_list_Gardner = new ArrayList<>();
+     ArrayList<ServiceProviderHelper> sp_list_Baby_Sitter = new ArrayList<>();
++
+     ServiceProviderAdapter adapter;
+     FirebaseUser user;
+ 
+Index: app/src/main/java/com/rajat/projecta/MainActivity.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>package com.rajat.projecta;\r\n\r\nimport android.content.Intent;\r\nimport android.os.Bundle;\r\nimport android.view.View;\r\nimport android.widget.Button;\r\nimport android.widget.EditText;\r\n\r\nimport androidx.appcompat.app.AppCompatActivity;\r\n\r\nimport com.google.firebase.auth.FirebaseAuth;\r\nimport com.google.firebase.auth.FirebaseUser;\r\nimport com.google.firebase.database.DatabaseReference;\r\nimport com.google.firebase.database.FirebaseDatabase;\r\n\r\nimport java.util.HashMap;\r\n\r\npublic class MainActivity extends AppCompatActivity {\r\n    private Button submitBtnFirstPage;\r\n    private static EditText name;\r\n    private DatabaseReference mDatabase;\r\n    private EditText dob;\r\n    private EditText address;\r\n    private EditText aadharNumber;\r\n    private EditText mobile;\r\n    @Override\r\n    protected void onCreate(Bundle savedInstanceState) {\r\n        super.onCreate(savedInstanceState);\r\n        setContentView(R.layout.activity_main);\r\n        mDatabase = FirebaseDatabase.getInstance().getReference();\r\n//        startActivity(new Intent(getApplicationContext(), RegisterActivity.class));\r\n        submitBtnFirstPage = findViewById(R.id.submitBtnFirstPage);\r\n        name = findViewById(R.id.name);\r\n        dob = findViewById(R.id.dob);\r\n        address = findViewById(R.id.address);\r\n        aadharNumber = findViewById(R.id.aadharNumber);\r\n        mobile = findViewById(R.id.mobile);\r\n\r\n        name.setText((CharSequence) getIntent().getStringExtra(\"UserId\"));\r\n\r\n        submitBtnFirstPage.setOnClickListener(new View.OnClickListener() {\r\n            @Override\r\n            public void onClick(View view) {\r\n                //making entries to firebase\r\n                FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();\r\n                mDatabase.child(\"start\").child(user.getUid()).child(\"Address\").setValue(address.getText().toString());\r\n                mDatabase.child(\"start\").child(user.getUid()).child(\"DOB\").setValue(dob.getText().toString());\r\n                mDatabase.child(\"start\").child(user.getUid()).child(\"Aadhar Number\").setValue(aadharNumber.getText().toString());\r\n                mDatabase.child(\"start\").child(user.getUid()).child(\"mobile\").setValue(mobile.getText().toString());\r\n\r\n\r\n                startActivity(new Intent(getApplicationContext(), FragmentActivity.class));\r\n            }\r\n        });\r\n    }\r\n\r\n    public static String getName(){\r\n        return (name.getText().toString());\r\n    }\r\n\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/src/main/java/com/rajat/projecta/MainActivity.java	(revision 4cc6258c9064daa94cbf10e4ce3a823e2c746d2d)
++++ app/src/main/java/com/rajat/projecta/MainActivity.java	(date 1617552285309)
+@@ -23,6 +23,7 @@
+     private EditText address;
+     private EditText aadharNumber;
+     private EditText mobile;
++
+     @Override
+     protected void onCreate(Bundle savedInstanceState) {
+         super.onCreate(savedInstanceState);
+Index: app/build.gradle
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>apply plugin: 'com.android.application'\r\napply plugin: 'com.google.gms.google-services'\r\n\r\nandroid {\r\n    compileSdkVersion 30\r\n    buildToolsVersion \"30.0.0\"\r\n\r\n    defaultConfig {\r\n        applicationId \"com.rajat.projecta\"\r\n        minSdkVersion 23\r\n        targetSdkVersion 30\r\n        versionCode 1\r\n        versionName \"1.0\"\r\n\r\n        testInstrumentationRunner \"androidx.test.runner.AndroidJUnitRunner\"\r\n    }\r\n\r\n    buildTypes {\r\n        release {\r\n            minifyEnabled false\r\n            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'\r\n        }\r\n    }\r\n}\r\nrepositories {\r\n    mavenCentral()\r\n}\r\n\r\ndependencies {\r\n    implementation fileTree(dir: \"libs\", include: [\"*.jar\"])\r\n    implementation 'androidx.appcompat:appcompat:1.2.0'\r\n    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'\r\n    implementation 'com.google.firebase:firebase-auth:20.0.1'\r\n    implementation 'com.google.firebase:firebase-database:19.6.0'\r\n    implementation 'com.google.android.material:material:1.3.0'\r\n    implementation 'com.razorpay:checkout:1.6.6'\r\n    testImplementation 'junit:junit:4.12'\r\n    androidTestImplementation 'androidx.test.ext:junit:1.1.2'\r\n    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'\r\n\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+--- app/build.gradle	(revision 4cc6258c9064daa94cbf10e4ce3a823e2c746d2d)
++++ app/build.gradle	(date 1617560918951)
+@@ -32,6 +32,7 @@
+     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+     implementation 'com.google.firebase:firebase-auth:20.0.1'
+     implementation 'com.google.firebase:firebase-database:19.6.0'
++
+     implementation 'com.google.android.material:material:1.3.0'
+     implementation 'com.razorpay:checkout:1.6.6'
+     testImplementation 'junit:junit:4.12'
