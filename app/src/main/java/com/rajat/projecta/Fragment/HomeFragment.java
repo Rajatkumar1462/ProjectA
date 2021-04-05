@@ -150,7 +150,7 @@ public class HomeFragment extends Fragment implements CategoryAdapter.Categorycl
 
   */
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        dbr = FirebaseDatabase.getInstance().getReference().child("start").child("VWrlX6W2knYU7T8NcsBRJHWgs4N2").child("Orders");
+        dbr = FirebaseDatabase.getInstance().getReference().child("start").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Orders");
         dbr.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
