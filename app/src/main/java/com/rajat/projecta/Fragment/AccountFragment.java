@@ -91,13 +91,13 @@ class userDetail {
 
     userDetail(){
         mAuth = FirebaseAuth.getInstance();
-        name = mAuth.getCurrentUser().getDisplayName();
-        email = mAuth.getCurrentUser().getEmail();
+        name = "Name : "+mAuth.getCurrentUser().getDisplayName();
+        email = "Email : "+mAuth.getCurrentUser().getEmail();
         Task<DataSnapshot> snapshot = ref.child("start").child(mAuth.getCurrentUser().getUid()).child("Address").get().addOnCompleteListener(new OnCompleteListener<DataSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (task.isSuccessful()) {
-                    address = String.valueOf(task.getResult().getValue());
+                    address = "Address : "+String.valueOf(task.getResult().getValue());
                 }
             }
         });
@@ -105,7 +105,7 @@ class userDetail {
             @Override
             public void onComplete(@NonNull Task<DataSnapshot> task) {
                 if (task.isSuccessful()) {
-                    aadhar = String.valueOf(task.getResult().getValue());
+                    aadhar = "Aadhar number : "+String.valueOf(task.getResult().getValue());
                 }
             }
         });
