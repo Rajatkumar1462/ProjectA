@@ -10,12 +10,14 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.rajat.projecta.R;
 
+import java.util.ArrayList;
+
 public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.RecentViewHolder>{
     private int[] images;
-    private String[] data;
+    ArrayList<String> data;
 
     //Constructor
-    public RecentAdapter(int[] images,String[] data){
+    public RecentAdapter(int[] images,ArrayList<String> data){
         this.images=images;
         this.data=data;
     }
@@ -33,12 +35,12 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.RecentView
     @Override
     public void onBindViewHolder(@NonNull RecentViewHolder holder, int position) {
         holder.imgicon.setImageResource(images[position]);
-        holder.orderinfo.setText(data[position]);
+        holder.orderinfo.setText(data.get(position));
     }
 
     @Override
     public int getItemCount() {
-        return images.length;
+        return data.size();
     }
 
     //Recycler View For Recent Orders
