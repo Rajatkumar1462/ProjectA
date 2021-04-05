@@ -1,5 +1,6 @@
 package com.rajat.projecta.Adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -8,16 +9,22 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.rajat.projecta.Artist;
 import com.rajat.projecta.R;
 
+import java.util.ArrayList;
+
 public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.RecentViewHolder>{
-    private int[] images;
-    private String[] data;
+    private int[] images ;
+    private Context context;
+    ArrayList<Artist> artistList = new ArrayList<>();
 
     //Constructor
-    public RecentAdapter(int[] images,String[] data){
-        this.images=images;
-        this.data=data;
+    public RecentAdapter(Context context,int[] images,ArrayList<Artist> artistList){
+        this.context = context;
+        this.images = images;
+        this.artistList = artistList;
     }
 
     //ViewHolder-to Display view
@@ -32,23 +39,28 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.RecentView
     //For Binding Values
     @Override
     public void onBindViewHolder(@NonNull RecentViewHolder holder, int position) {
-        holder.imgicon.setImageResource(images[position]);
-        holder.orderinfo.setText(data[position]);
+        Artist artist = artistList.get(position);
+        holder.recent_item_image.setImageResource(images[position]);
+        holder.recent_item_order_name.setText(artist.Name);
+        holder.recent_item_order_cost.setText(""+artist.Cost);
+        holder.recent_item_order_status.setText(artist.status);
     }
 
     @Override
     public int getItemCount() {
-        return images.length;
+        return artistList.size();
     }
 
     //Recycler View For Recent Orders
     public class RecentViewHolder extends RecyclerView.ViewHolder {
-        ImageView imgicon;
-        TextView orderinfo;
+        ImageView recent_item_image;
+        TextView recent_item_order_name,recent_item_order_cost,recent_item_order_status;
         public RecentViewHolder(@NonNull View itemView) {
             super(itemView);
-            imgicon = itemView.findViewById(R.id.RecentImage);
-            orderinfo =itemView.findViewById(R.id.RecentOrderInfo);
+            recent_item_image = itemView.findViewById(R.id.recent_item_image);
+            recent_item_order_name = itemView.findViewById(R.id.recent_item_order_name);
+            recent_item_order_cost = itemView.findViewById(R.id.recent_item_order_cost);
+            recent_item_order_status = itemView.findViewById(R.id.recent_item_order_status);
         }
     }
 }

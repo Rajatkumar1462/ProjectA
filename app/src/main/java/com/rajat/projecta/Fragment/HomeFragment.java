@@ -19,6 +19,11 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 import com.rajat.projecta.Adapter.CategoryAdapter;
 import com.rajat.projecta.Adapter.ServiceProviderAdapter;
 import com.rajat.projecta.BookActivity;
@@ -28,10 +33,32 @@ import com.rajat.projecta.R;
 import com.rajat.projecta.RecentListActivity;
 
 import java.util.ArrayList;
+class Post {
 
+    public String Name;
+    public Long Cost;
+    public Long duration;
+    public Long paymentId;
+    public String status;
+
+    public Post(String Name, Long Cost,Long duration,Long paymentId,String status) {
+        this.Name= Name;
+        this.Cost = Cost;
+        this.duration = duration;
+        this.paymentId = paymentId;
+        this.status = status;
+    }
+    public Post(){
+
+    }
+}
 public class HomeFragment extends Fragment implements CategoryAdapter.CategoryclickInterface, ServiceProviderAdapter.ServiceproviderClickInterface {
     //Declaration
     private TextView AtTopName;
+    private TextView Recent_Order_Sp_Name;
+    private TextView Recent_Order_Cost;
+    private TextView Recent_Order_Status;
+
     ArrayList<String> cat_list = new ArrayList<>();
     ArrayList<ServiceProviderHelper> sp_list = new ArrayList<>();
     ArrayList<ServiceProviderHelper> sp_list_Cook = new ArrayList<>();
@@ -40,6 +67,9 @@ public class HomeFragment extends Fragment implements CategoryAdapter.Categorycl
     ArrayList<ServiceProviderHelper> sp_list_Gardner = new ArrayList<>();
     ArrayList<ServiceProviderHelper> sp_list_Baby_Sitter = new ArrayList<>();
 
+    DatabaseReference dbr = FirebaseDatabase.getInstance().getReference();
+    DatabaseReference dfh = dbr.child("BabySitter").child("BabySitter1");
+    ValueEventListener valueEventListener;
     ServiceProviderAdapter adapter;
     FirebaseUser user;
     RecyclerView serviceprovider_list;
@@ -51,6 +81,9 @@ public class HomeFragment extends Fragment implements CategoryAdapter.Categorycl
         View view = inflater.inflate(R.layout.fragment_home,container,false);
         user = FirebaseAuth.getInstance().getCurrentUser();
         //settingDisplayName
+        Recent_Order_Sp_Name = view.findViewById(R.id.recent_order_name);
+        Recent_Order_Cost  = view.findViewById(R.id.recent_order_cost);
+        Recent_Order_Status = view.findViewById(R.id.recent_order_status);
         AtTopName = view.findViewById(R.id.atTopName);
 //        String nameFromMainActivity = MainActivity.getName();
         AtTopName.setText(user.getDisplayName());
@@ -94,6 +127,43 @@ public class HomeFragment extends Fragment implements CategoryAdapter.Categorycl
         adapter = new ServiceProviderAdapter(sp_list, (ServiceProviderAdapter.ServiceproviderClickInterface) this);
         serviceprovider_list.setAdapter(adapter);
 
+        /*dfh.addListenerForSingleValueEvent(valueEventListener);
+
+        valueEventListener = new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                sp_list.clear();
+                if(dataSnapshot.exists()){
+                    for (DataSnapshot snapshot:dataSnapshot.getChildren()){
+                        ServiceProviderHelper helper = snapshot.getValue(ServiceProviderHelper.class);
+                        sp_list.add(helper);
+                    }
+                    adapter.notifyDataSetChanged();
+                }
+            }
+
+*//*            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        };
+
+  */
+        FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+        dbr = FirebaseDatabase.getInstance().getReference().child("start").child("VWrlX6W2knYU7T8NcsBRJHWgs4N2").child("Orders");
+        dbr.addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                Post post = snapshot.getValue(Post.class);
+                Recent_Order_Sp_Name.setText(post.Name);
+                Recent_Order_Cost.setText(Long.toString(post.Cost));
+                Recent_Order_Status.setText(post.status);
+            }
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
         //Category Sell All Button ClickListner
         TextView cat_see_all;
         cat_see_all = view.findViewById(R.id.category_see_all_link);
@@ -104,6 +174,8 @@ public class HomeFragment extends Fragment implements CategoryAdapter.Categorycl
                 startActivity(intent);
             }
         });
+
+
 
         //Recent Sell All Button ClickListner
         TextView recent_see_all;
