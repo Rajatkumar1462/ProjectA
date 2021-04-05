@@ -24,16 +24,16 @@ import java.util.ArrayList;
 class Post {
 
     public String Name;
-    public Long cost;
+    public Long Cost;
     public Long duration;
-    public Long paymentId;
+    public Long paymentid;
     public String status;
 
     public Post(String Name, Long cost,Long duration,Long paymentId,String status) {
         this.Name= Name;
-        this.cost = cost;
+        this.Cost = cost;
         this.duration = duration;
-        this.paymentId = paymentId;
+        this.paymentid = paymentId;
         this.status = status;
     }
     public Post(){
@@ -55,12 +55,12 @@ public class RecentListActivity extends AppCompatActivity {
         recent_list.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL,false));
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        dbr = FirebaseDatabase.getInstance().getReference().child("start").child("XbS13nOFzQUifcJiOt90dXyVyNZ2").child("Orders").child("d1suresh");
+        dbr = FirebaseDatabase.getInstance().getReference().child("start").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Orders");
         dbr.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 Post post = snapshot.getValue(Post.class);
-                data.add(post.Name+" "+post.status+" "+post.paymentId+" "+post.duration+" "+post.cost);
+                data.add(post.Name+" "+post.status+" "+post.paymentid+" "+post.duration+" "+post.Cost);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
