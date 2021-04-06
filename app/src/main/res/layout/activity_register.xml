@@ -30,7 +30,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/LoginBtnOnRegister"
         app:layout_constraintVertical_bias="0.023"
-        app:srcCompat="@drawable/screenshot__4_" />
+        app:srcCompat="@mipmap/ic_launcher" />
 
     <TextView
         android:id="@+id/registerEmailHead"
