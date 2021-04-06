@@ -23,35 +23,18 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.rajat.projecta.Adapter.CategoryAdapter;
 import com.rajat.projecta.Adapter.ServiceProviderAdapter;
 import com.rajat.projecta.BookActivity;
 import com.rajat.projecta.CategoryListActivity;
+import com.rajat.projecta.Helper.ServiceProviderBookHelper;
 import com.rajat.projecta.Helper.ServiceProviderHelper;
 import com.rajat.projecta.R;
 import com.rajat.projecta.RecentListActivity;
 
 import java.util.ArrayList;
-class Post {
-
-    public String Name;
-    public Long Cost;
-    public Long Duration;
-    public Long PaymentId;
-    public String Status;
-
-    public Post(String Name, Long Cost,Long Duration,Long PaymentId,String Status) {
-        this.Name= Name;
-        this.Cost = Cost;
-        this.Duration = Duration;
-        this.PaymentId = PaymentId;
-        this.Status = Status;
-    }
-    public Post(){
-
-    }
-}
 public class HomeFragment extends Fragment implements CategoryAdapter.CategoryclickInterface, ServiceProviderAdapter.ServiceproviderClickInterface {
     //Declaration
     private TextView AtTopName;
@@ -73,6 +56,7 @@ public class HomeFragment extends Fragment implements CategoryAdapter.Categorycl
     ServiceProviderAdapter adapter;
     FirebaseUser user;
     RecyclerView serviceprovider_list;
+    ServiceProviderBookHelper lastorder = new ServiceProviderBookHelper();
 
     @Nullable
     @Override
@@ -128,14 +112,25 @@ public class HomeFragment extends Fragment implements CategoryAdapter.Categorycl
         serviceprovider_list.setAdapter(adapter);
 
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
-        dbr = FirebaseDatabase.getInstance().getReference().child("start").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Orders");
-        dbr.addValueEventListener(new ValueEventListener() {
+
+        dbr = FirebaseDatabase.getInstance().getReference();
+        final Query lastnode = dbr.child("start").child(user.getUid()).child("All Orders").orderByChild("Time").limitToLast(1);
+        lastnode.addValueEventListener(new ValueEventListener() {
             @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                Post post = snapshot.getValue(Post.class);
-                Recent_Order_Sp_Name.setText(post.Name);
-                Recent_Order_Cost.setText(Long.toString(post.Cost));
-                Recent_Order_Status.setText(post.Status);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                if(dataSnapshot.exists()){
+                    Long temp = 0L;
+                    for(DataSnapshot snapshot:dataSnapshot.getChildren()){
+                        ServiceProviderBookHelper serviceProviderBookHelper = snapshot.getValue(ServiceProviderBookHelper.class);
+                        if(serviceProviderBookHelper.Time>temp){
+                            temp = serviceProviderBookHelper.Time;
+                            lastorder  = serviceProviderBookHelper;
+                        }
+                    }
+                }
+                Recent_Order_Sp_Name.setText(lastorder.Name);
+                Recent_Order_Cost.setText("" +lastorder.Cost);
+                Recent_Order_Status.setText(lastorder.Status);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

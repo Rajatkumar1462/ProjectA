@@ -139,6 +139,7 @@ public class BookActivity extends AppCompatActivity implements PaymentResultList
         ref.child(paymentid).child("Cost").setValue(Cost);
         ref.child(paymentid).child("Duration").setValue(duration);
         ref.child(paymentid).child("Paymentid").setValue(paymentid);
+        ref.child(paymentid).child("Time").setValue(System.currentTimeMillis());
         ref.child(paymentid).child("Status").setValue("Success");
 
     }
