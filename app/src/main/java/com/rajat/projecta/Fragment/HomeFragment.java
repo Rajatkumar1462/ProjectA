@@ -3,6 +3,7 @@ package com.rajat.projecta.Fragment;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,25 +18,37 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.ChildEventListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
 import com.rajat.projecta.Adapter.CategoryAdapter;
 import com.rajat.projecta.Adapter.ServiceProviderAdapter;
 import com.rajat.projecta.BookActivity;
 import com.rajat.projecta.CategoryListActivity;
+import com.rajat.projecta.FragmentActivity;
 import com.rajat.projecta.Helper.ServiceProviderBookHelper;
 import com.rajat.projecta.Helper.ServiceProviderHelper;
 import com.rajat.projecta.R;
 import com.rajat.projecta.RecentListActivity;
 
 import java.util.ArrayList;
-public class HomeFragment extends Fragment implements CategoryAdapter.CategoryclickInterface, ServiceProviderAdapter.ServiceproviderClickInterface {
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import static java.lang.Thread.sleep;
+
+public class HomeFragment extends Fragment implements CategoryAdapter.CategoryclickInterface, ServiceProviderAdapter.ServiceproviderClickInterface{
     //Declaration
     private TextView AtTopName;
     private TextView Recent_Order_Sp_Name;
@@ -57,6 +70,8 @@ public class HomeFragment extends Fragment implements CategoryAdapter.Categorycl
     FirebaseUser user;
     RecyclerView serviceprovider_list;
     ServiceProviderBookHelper lastorder = new ServiceProviderBookHelper();
+    HashMap<String, HashMap<String, String>> resultList;
+
 
     @Nullable
     @Override
@@ -86,27 +101,18 @@ public class HomeFragment extends Fragment implements CategoryAdapter.Categorycl
         serviceprovider_list = view.findViewById(R.id.service_provider_list);
         serviceprovider_list.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.HORIZONTAL,false));
 
+
         //values are declared  here
         sp_list_Cook.add(new ServiceProviderHelper(R.drawable.cook,"Suresh","5 star","3 year Experience"));
         sp_list_Cook.add(new ServiceProviderHelper(R.drawable.cook,"Mamta Devi","4.7 star","1 year Experience"));
         sp_list_Cook.add(new ServiceProviderHelper(R.drawable.cook,"Gopal","3.7 star","6 Month Experience"));
         sp_list.addAll(sp_list_Cook);
 
-        sp_list_Driver.add(new ServiceProviderHelper(R.drawable.driver,"Basant","4.8 star","2.5 year Experience"));
-        sp_list_Driver.add(new ServiceProviderHelper(R.drawable.driver,"Tahir","4.5 star","2 year Experience"));
-        sp_list_Driver.add(new ServiceProviderHelper(R.drawable.driver,"Rajiv Anna","4.4 star","1 year Experience"));
 
-        sp_list_Maid.add(new ServiceProviderHelper(R.drawable.maid,"Mala","4.9 star","5 year Experience"));
-        sp_list_Maid.add(new ServiceProviderHelper(R.drawable.maid,"Shakuntala","4.8 star","3.5 year Experience"));
-        sp_list_Maid.add(new ServiceProviderHelper(R.drawable.maid,"Ramu","4.5 star","2 year Experience"));
-
-        sp_list_Gardner.add(new ServiceProviderHelper(R.drawable.gardner,"Prakash","4.5 star","2 year Experience"));
-        sp_list_Gardner.add(new ServiceProviderHelper(R.drawable.gardner,"Raman","4.4 star","1 year Experience"));
-        sp_list_Gardner.add(new ServiceProviderHelper(R.drawable.gardner,"Shadique","4.3 star","New"));
-
-        sp_list_Baby_Sitter.add(new ServiceProviderHelper(R.drawable.baby_sitter,"Pragati","4.5 star","3 year Experience"));
-        sp_list_Baby_Sitter.add(new ServiceProviderHelper(R.drawable.baby_sitter,"Mohini","4 star","2 year Experience"));
-        sp_list_Baby_Sitter.add(new ServiceProviderHelper(R.drawable.baby_sitter,"Rohini","3.8 star","1 year Experience"));
+        loadValues("Driver", sp_list_Driver, R.drawable.driver);
+        loadValues("Maid", sp_list_Maid, R.drawable.maid);
+        loadValues("Gardener", sp_list_Gardner, R.drawable.gardner);
+        loadValues("BabySitter", sp_list_Baby_Sitter, R.drawable.baby_sitter);
 
         adapter = new ServiceProviderAdapter(sp_list, (ServiceProviderAdapter.ServiceproviderClickInterface) this);
         serviceprovider_list.setAdapter(adapter);
@@ -137,7 +143,7 @@ public class HomeFragment extends Fragment implements CategoryAdapter.Categorycl
 
             }
         });
-        //Category Sell All Button ClickListner
+        //Category See All Button ClickListner
         TextView cat_see_all;
         cat_see_all = view.findViewById(R.id.category_see_all_link);
         cat_see_all.setOnClickListener(new View.OnClickListener() {
@@ -218,4 +224,25 @@ public class HomeFragment extends Fragment implements CategoryAdapter.Categorycl
 
         startActivity(intent);
     }
+
+    public void loadValues(String field, ArrayList<ServiceProviderHelper> list, int path){
+        DatabaseReference ref = FirebaseDatabase.getInstance().getReference();
+        ref.child("SP").child(field).addValueEventListener(new ValueEventListener() {
+            @Override
+            public void onDataChange(@NonNull DataSnapshot snapshot) {
+                resultList = (HashMap<String, HashMap<String, String>>) snapshot.getValue();
+                for(Map.Entry<String, HashMap<String, String>> set : resultList.entrySet()){
+                    HashMap<String, String> x = set.getValue();
+                    list.add(new ServiceProviderHelper(path,x.get("Name"),String.valueOf(x.get("Rating"))+" Star",String.valueOf(x.get("Experience"))+" year Experience"));
+                    Log.i("", String.valueOf(R.drawable.cook));
+                }
+            }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError error) {
+
+            }
+        });
+    }
+
 }
