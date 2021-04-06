@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
     private EditText dob;
     private EditText address;
     private EditText aadharNumber;
-    private EditText mobile;
+    private EditText Mobile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -35,7 +35,7 @@ public class MainActivity extends AppCompatActivity {
         dob = findViewById(R.id.dob);
         address = findViewById(R.id.address);
         aadharNumber = findViewById(R.id.aadharNumber);
-        mobile = findViewById(R.id.mobile);
+        Mobile = findViewById(R.id.mobile);
 
         name.setText((CharSequence) getIntent().getStringExtra("UserId"));
 
@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 mDatabase.child("start").child(user.getUid()).child("Address").setValue(address.getText().toString());
                 mDatabase.child("start").child(user.getUid()).child("DOB").setValue(dob.getText().toString());
                 mDatabase.child("start").child(user.getUid()).child("Aadhar Number").setValue(aadharNumber.getText().toString());
-                mDatabase.child("start").child(user.getUid()).child("mobile").setValue(mobile.getText().toString());
+                mDatabase.child("start").child(user.getUid()).child("Mobile").setValue(Mobile.getText().toString());
 
 
                 startActivity(new Intent(getApplicationContext(), FragmentActivity.class));

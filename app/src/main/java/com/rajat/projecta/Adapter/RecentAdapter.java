@@ -10,7 +10,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.rajat.projecta.Artist;
+import com.rajat.projecta.Helper.ServiceProviderBookHelper;
 import com.rajat.projecta.R;
 
 import java.util.ArrayList;
@@ -18,13 +18,13 @@ import java.util.ArrayList;
 public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.RecentViewHolder>{
     private int[] images ;
     private Context context;
-    ArrayList<Artist> artistList = new ArrayList<>();
+    ArrayList<ServiceProviderBookHelper> serviceProviderBookHelperList = new ArrayList<>();
 
     //Constructor
-    public RecentAdapter(Context context,int[] images,ArrayList<Artist> artistList){
+    public RecentAdapter(Context context,int[] images,ArrayList<ServiceProviderBookHelper> serviceProviderBookHelperList){
         this.context = context;
         this.images = images;
-        this.artistList = artistList;
+        this.serviceProviderBookHelperList = serviceProviderBookHelperList;
     }
 
     //ViewHolder-to Display view
@@ -39,16 +39,16 @@ public class RecentAdapter extends RecyclerView.Adapter<RecentAdapter.RecentView
     //For Binding Values
     @Override
     public void onBindViewHolder(@NonNull RecentViewHolder holder, int position) {
-        Artist artist = artistList.get(position);
+        ServiceProviderBookHelper serviceProviderBookHelper = serviceProviderBookHelperList.get(position);
         holder.recent_item_image.setImageResource(images[position]);
-        holder.recent_item_order_name.setText(artist.Name);
-        holder.recent_item_order_cost.setText(""+artist.Cost);
-        holder.recent_item_order_status.setText(artist.status);
+        holder.recent_item_order_name.setText(serviceProviderBookHelper.Name);
+        holder.recent_item_order_cost.setText(""+ serviceProviderBookHelper.Cost);
+        holder.recent_item_order_status.setText(serviceProviderBookHelper.Status);
     }
 
     @Override
     public int getItemCount() {
-        return artistList.size();
+        return serviceProviderBookHelperList.size();
     }
 
     //Recycler View For Recent Orders

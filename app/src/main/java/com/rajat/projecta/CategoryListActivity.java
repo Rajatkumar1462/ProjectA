@@ -23,6 +23,8 @@ public class CategoryListActivity extends AppCompatActivity implements ServicePr
     ArrayList<ServiceProviderHelper> sp_list = new ArrayList<>();
     FirebaseUser user;
 
+    private String Type;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +74,7 @@ public class CategoryListActivity extends AppCompatActivity implements ServicePr
         intent.putExtra("rating",rating);
         intent.putExtra("info",info);
         intent.putExtra("profile",image);
+        intent.putExtra("Type",Type);
 
         startActivity(intent);
     }

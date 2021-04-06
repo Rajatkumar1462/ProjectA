@@ -37,16 +37,16 @@ class Post {
 
     public String Name;
     public Long Cost;
-    public Long duration;
-    public Long paymentId;
-    public String status;
+    public Long Duration;
+    public Long PaymentId;
+    public String Status;
 
-    public Post(String Name, Long Cost,Long duration,Long paymentId,String status) {
+    public Post(String Name, Long Cost,Long Duration,Long PaymentId,String Status) {
         this.Name= Name;
         this.Cost = Cost;
-        this.duration = duration;
-        this.paymentId = paymentId;
-        this.status = status;
+        this.Duration = Duration;
+        this.PaymentId = PaymentId;
+        this.Status = Status;
     }
     public Post(){
 
@@ -127,28 +127,6 @@ public class HomeFragment extends Fragment implements CategoryAdapter.Categorycl
         adapter = new ServiceProviderAdapter(sp_list, (ServiceProviderAdapter.ServiceproviderClickInterface) this);
         serviceprovider_list.setAdapter(adapter);
 
-        /*dfh.addListenerForSingleValueEvent(valueEventListener);
-
-        valueEventListener = new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                sp_list.clear();
-                if(dataSnapshot.exists()){
-                    for (DataSnapshot snapshot:dataSnapshot.getChildren()){
-                        ServiceProviderHelper helper = snapshot.getValue(ServiceProviderHelper.class);
-                        sp_list.add(helper);
-                    }
-                    adapter.notifyDataSetChanged();
-                }
-            }
-
-*//*            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        };
-
-  */
         FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
         dbr = FirebaseDatabase.getInstance().getReference().child("start").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("Orders");
         dbr.addValueEventListener(new ValueEventListener() {
@@ -157,7 +135,7 @@ public class HomeFragment extends Fragment implements CategoryAdapter.Categorycl
                 Post post = snapshot.getValue(Post.class);
                 Recent_Order_Sp_Name.setText(post.Name);
                 Recent_Order_Cost.setText(Long.toString(post.Cost));
-                Recent_Order_Status.setText(post.status);
+                Recent_Order_Status.setText(post.Status);
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {

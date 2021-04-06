@@ -1,11 +1,8 @@
 package com.rajat.projecta;
 
-import android.os.Build;
 import android.os.Bundle;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -18,6 +15,7 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 import com.rajat.projecta.Adapter.RecentAdapter;
+import com.rajat.projecta.Helper.ServiceProviderBookHelper;
 
 import java.util.ArrayList;
 
@@ -25,7 +23,7 @@ import java.util.ArrayList;
 public class RecentListActivity extends AppCompatActivity {
     DatabaseReference dbr;
     private RecentAdapter adapter;
-    private ArrayList<Artist> artistList =  new ArrayList<>();
+    private ArrayList<ServiceProviderBookHelper> serviceProviderBookHelperList =  new ArrayList<>();
     int images[]={R.drawable.driver,R.drawable.baby_sitter,R.drawable.baby_sitter};
 
     @Override
@@ -42,11 +40,11 @@ public class RecentListActivity extends AppCompatActivity {
         dbr.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                artistList.clear();
+                serviceProviderBookHelperList.clear();
                 if(dataSnapshot.exists()){
                     for(DataSnapshot snapshot:dataSnapshot.getChildren()){
-                        Artist artist = snapshot.getValue(Artist.class);
-                        artistList.add(artist);
+                        ServiceProviderBookHelper serviceProviderBookHelper = snapshot.getValue(ServiceProviderBookHelper.class);
+                        serviceProviderBookHelperList.add(serviceProviderBookHelper);
                     }
                     adapter.notifyDataSetChanged();
                 }
@@ -56,8 +54,8 @@ public class RecentListActivity extends AppCompatActivity {
 
             }
         });
-        artistList.add(new Artist());
-        adapter = new RecentAdapter(this,images,artistList);
+        serviceProviderBookHelperList.add(new ServiceProviderBookHelper());
+        adapter = new RecentAdapter(this,images, serviceProviderBookHelperList);
         recent_list.setAdapter(adapter);
     }
 }

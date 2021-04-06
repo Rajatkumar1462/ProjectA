@@ -35,14 +35,16 @@ public class BookActivity extends AppCompatActivity implements PaymentResultList
     TextView BookInfo;
     EditText Duration;
     TextView textAmount;
-    private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+
+    final private DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+    final private  DatabaseReference ref = mDatabase.child("start").child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child("All Orders");
     Button bookbtn;
     String MobileNo = null;
     String EmailId = null;
 
     int payableamount = 0;
 
-    String title;
+    String title = "";
     String rating;
 
     @Override
@@ -50,6 +52,8 @@ public class BookActivity extends AppCompatActivity implements PaymentResultList
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_book);
 
+        Intent intent = getIntent();
+        title = intent.getStringExtra("title");
         Image = findViewById(R.id.BookProfile);
         Bookname = findViewById(R.id.Bookname);
         BookRating = findViewById(R.id.BookRating);
@@ -75,7 +79,7 @@ public class BookActivity extends AppCompatActivity implements PaymentResultList
             }
         });
 
-        Intent intent = getIntent();
+
         Bookname.setText(intent.getStringExtra("title"));
         BookRating.setText(intent.getStringExtra("rating"));
         BookInfo.setText(intent.getStringExtra("info"));
@@ -125,16 +129,18 @@ public class BookActivity extends AppCompatActivity implements PaymentResultList
         });
 
     }
-
     @Override
     public void onPaymentSuccess(String s) {
-        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        int Cost = payableamount/100;
+        int duration = Cost/100;
+        String paymentid = s;
+        ref.child(paymentid);
+        ref.child(paymentid).child("Name").setValue(title);
+        ref.child(paymentid).child("Cost").setValue(Cost);
+        ref.child(paymentid).child("Duration").setValue(duration);
+        ref.child(paymentid).child("Paymentid").setValue(paymentid);
+        ref.child(paymentid).child("Status").setValue("Success");
 
-        builder.setTitle("Payment ID");
-
-        builder.setMessage(s);
-
-        builder.show();
     }
 
     @Override
